@@ -1,11 +1,15 @@
-import { Link } from "@tanstack/react-router";
+import { Link, NavLink } from "react-router-dom";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
+import logo from "@/assets/logo-BqvBdEiO.svg";
 
 const links = [
   { to: "/", label: "Home" },
   { to: "/services", label: "Services" },
   { to: "/projects", label: "Projects" },
+  { to: "/team", label: "Team" },
+  { to: "/testimonials", label: "Testimonials" },
+  { to: "/blogs", label: "Blogs" },
   { to: "/about", label: "About" },
   { to: "/contact", label: "Contact" },
 ] as const;
@@ -16,24 +20,22 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-background/85 backdrop-blur-md">
       <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6">
-        <Link to="/" className="flex flex-col leading-none" onClick={() => setOpen(false)}>
-          <span className="text-2xl font-black tracking-tighter">PEARL HERITANCE</span>
-          <span className="font-mono text-[9px] uppercase tracking-widest text-muted-foreground">
-            Bridging Vision and Development
-          </span>
+        <Link to="/" className="flex items-center" onClick={() => setOpen(false)}>
+          <img src={logo} alt="Pearl Heritance logo" className="h-12 w-auto" />
         </Link>
 
         <nav className="hidden gap-10 text-xs font-semibold uppercase tracking-widest md:flex">
           {links.map((l) => (
-            <Link
+            <NavLink
               key={l.to}
               to={l.to}
-              className="transition-colors hover:text-accent"
-              activeProps={{ className: "text-accent" }}
-              activeOptions={{ exact: l.to === "/" }}
+              end={l.to === "/"}
+              className={({ isActive }) =>
+                `transition-colors hover:text-accent ${isActive ? "text-accent" : ""}`
+              }
             >
               {l.label}
-            </Link>
+            </NavLink>
           ))}
         </nav>
 
@@ -57,14 +59,19 @@ export function SiteHeader() {
       {open && (
         <nav className="border-t border-border bg-card px-6 py-4 md:hidden">
           {links.map((l) => (
-            <Link
+            <NavLink
               key={l.to}
               to={l.to}
               onClick={() => setOpen(false)}
-              className="block border-b border-border py-3 text-xs font-semibold uppercase tracking-widest last:border-0"
+              end={l.to === "/"}
+              className={({ isActive }) =>
+                `block border-b border-border py-3 text-xs font-semibold uppercase tracking-widest last:border-0 ${
+                  isActive ? "text-accent" : ""
+                }`
+              }
             >
               {l.label}
-            </Link>
+            </NavLink>
           ))}
         </nav>
       )}

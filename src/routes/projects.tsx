@@ -1,15 +1,13 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { useMemo, useState } from "react";
+import { Link } from "react-router-dom";
 import projectResidential from "@/assets/project-residential.jpg";
 import projectCommercial from "@/assets/project-commercial.jpg";
 import projectHospitality from "@/assets/project-hospitality.jpg";
 import projectInterior from "@/assets/project-interior.jpg";
 
-const title = "Projects | Pearl Heritance Residential, Commercial & Hospitality";
-const description =
-  "Selected residential, commercial, hospitality and interior fit-out projects delivered by Pearl Heritance across Sri Lanka.";
-
 const projects = [
   {
+    slug: "residence-at-nawala",
     name: "Residence at Nawala",
     sector: "Residential",
     detail: "Design & build · 2,800 sqft",
@@ -17,6 +15,7 @@ const projects = [
     alt: "Modern private residence at Nawala",
   },
   {
+    slug: "mini-apartment-complex-dehiwala",
     name: "Mini Apartment Complex, Dehiwala",
     sector: "Commercial",
     detail: "Project management · Multi-unit development",
@@ -24,6 +23,7 @@ const projects = [
     alt: "Commercial apartment complex in Dehiwala",
   },
   {
+    slug: "eco-lodge-retreat",
     name: "Eco Lodge Retreat",
     sector: "Hospitality",
     detail: "Design consultancy · Construction supervision",
@@ -31,6 +31,7 @@ const projects = [
     alt: "Eco lodge retreat in the hill country",
   },
   {
+    slug: "cafe-retail-fit-outs-colombo",
     name: "Café & Retail Fit-Outs, Colombo",
     sector: "Interiors",
     detail: "Interior design & built · Custom joinery",
@@ -39,19 +40,27 @@ const projects = [
   },
 ] as const;
 
-export const Route = createFileRoute("/projects")({
-  head: () => ({
-    meta: [
-      { title },
-      { name: "description", content: description },
-      { property: "og:title", content: title },
-      { property: "og:description", content: description },
-    ],
-  }),
-  component: ProjectsPage,
-});
+const filters = ["All", "Residential", "Commercial", "Hospitality", "Interiors"] as const;
 
-function ProjectsPage() {
+export default function ProjectsPage() {
+  const [activeFilter, setActiveFilter] = useState<(typeof filters)[number]>("All");
+  const [search, setSearch] = useState("");
+
+  const visibleProjects = useMemo(() => {
+    const query = search.trim().toLowerCase();
+
+    return projects.filter((project) => {
+      const matchesFilter = activeFilter === "All" || project.sector === activeFilter;
+      const matchesSearch =
+        query.length === 0 ||
+        project.name.toLowerCase().includes(query) ||
+        project.detail.toLowerCase().includes(query) ||
+        project.sector.toLowerCase().includes(query);
+
+      return matchesFilter && matchesSearch;
+    });
+  }, [activeFilter, search]);
+
   return (
     <>
       <section className="border-b border-border px-6 py-24">
@@ -70,26 +79,78 @@ function ProjectsPage() {
       </section>
 
       <section className="px-6 py-24">
-        <div className="mx-auto grid max-w-7xl grid-cols-1 gap-12 md:grid-cols-2">
-          {projects.map((p) => (
-            <article key={p.name}>
-              <img
-                src={p.image}
-                alt={p.alt}
-                loading="lazy"
-                width={1200}
-                height={900}
-                className="aspect-[4/3] w-full object-cover"
+        <div className="mx-auto max-w-7xl">
+          <div className="mb-8 flex flex-col gap-5 border border-border bg-card p-5 md:flex-row md:items-center md:justify-between">
+            <div className="flex flex-wrap gap-2">
+              {filters.map((filter) => (
+                <button
+                  key={filter}
+                  type="button"
+                  onClick={() => setActiveFilter(filter)}
+                  className={`px-4 py-2 text-[10px] font-bold uppercase tracking-widest transition-colors ${
+                    activeFilter === filter
+                      ? "bg-primary text-primary-foreground"
+                      : "border border-input bg-background text-foreground hover:border-accent hover:text-accent"
+                  }`}
+                >
+                  {filter}
+                </button>
+              ))}
+            </div>
+
+            <div className="w-full max-w-md">
+              <label className="sr-only" htmlFor="project-search">
+                Search projects
+              </label>
+              <input
+                id="project-search"
+                type="search"
+                value={search}
+                onChange={(event) => setSearch(event.target.value)}
+                placeholder="Search projects..."
+                className="w-full border border-input bg-background px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:border-accent focus:outline-none"
               />
-              <div className="mt-6 flex items-start justify-between gap-6">
-                <div>
-                  <h2 className="font-bold uppercase">{p.name}</h2>
-                  <p className="text-xs text-muted-foreground">{p.detail}</p>
-                </div>
-                <span className="font-mono text-[10px] uppercase text-accent">{p.sector}</span>
-              </div>
-            </article>
-          ))}
+            </div>
+          </div>
+
+          {visibleProjects.length === 0 ? (
+            <div className="border border-border bg-card p-12 text-center">
+              <h2 className="text-2xl font-black uppercase tracking-tight">No projects found</h2>
+              <p className="mt-4 text-muted-foreground">
+                Try another keyword or switch back to a different filter.
+              </p>
+            </div>
+          ) : (
+            <div className="grid max-w-7xl grid-cols-1 gap-12 md:grid-cols-2">
+              {visibleProjects.map((p) => (
+                <article key={p.name}>
+                  <div className="relative">
+                    <Link to={`/projects/${p.slug}`}>
+                      <img
+                        src={p.image}
+                        alt={p.alt}
+                        loading="lazy"
+                        width={1200}
+                        height={900}
+                        className="aspect-[4/3] w-full object-cover"
+                      />
+                    </Link>
+                    <span className="absolute right-4 top-4 bg-white/90 px-3 py-2 font-mono text-[10px] uppercase tracking-[0.2em] text-primary backdrop-blur-sm">
+                      {p.sector}
+                    </span>
+                  </div>
+                  <div className="mt-6 flex items-start justify-between gap-6">
+                    <div>
+                      <Link to={`/projects/${p.slug}`} className="font-bold uppercase hover:text-accent">
+                        {p.name}
+                      </Link>
+                      <p className="text-xs text-muted-foreground">{p.detail}</p>
+                    </div>
+                  </div>
+                </article>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 

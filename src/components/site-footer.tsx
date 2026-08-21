@@ -1,4 +1,4 @@
-import { Link } from "@tanstack/react-router";
+import { Link } from "react-router-dom";
 import { company } from "@/data/company";
 
 export function SiteFooter() {
@@ -53,6 +53,12 @@ export function SiteFooter() {
               </Link>
               <Link to="/projects" className="hover:text-accent">
                 Projects
+              </Link>
+              <Link to="/testimonials" className="hover:text-accent">
+                Testimonials
+              </Link>
+              <Link to="/blogs" className="hover:text-accent">
+                Blogs
               </Link>
               <Link to="/contact" className="hover:text-accent">
                 Contact

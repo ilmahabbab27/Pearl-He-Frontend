@@ -24,45 +24,59 @@ export const company = {
 export const services = [
   {
     code: "01",
-    title: "Architectural & Interior Design",
+    title: "Residential Buildings",
     summary:
-      "Concept development, architectural drawings, interior and landscape design that balance intent with buildability.",
-    points: ["Architectural design", "Interior design", "Landscape design"],
+      "Thoughtful residential design and delivery for homes that balance comfort, function and long-term value.",
+    points: ["New homes", "Luxury residences", "Custom residential projects"],
   },
   {
     code: "02",
-    title: "Consultancy",
+    title: "Tourist Amenities & eco-friendly buildings",
     summary:
-      "Engineering consultancy, quantity surveying and feasibility studies that de-risk a project before it breaks ground.",
-    points: ["Engineering consultancy", "Quantity surveying", "Feasibility studies"],
+      "Sustainable hospitality and eco-conscious buildings designed to support memorable guest experiences and environmental responsibility.",
+    points: ["Tourist facilities", "Eco-friendly design", "Sustainable hospitality spaces"],
   },
   {
     code: "03",
-    title: "Project Management",
+    title: "Commercial & other buildings",
     summary:
-      "Planning, cost management, tender documentation and contractor selection under one accountable team.",
-    points: ["Planning & cost control", "Tender documentation", "Contractor selection"],
+      "Professional planning and built solutions for commercial developments and a wide range of institutional or mixed-use projects.",
+    points: ["Commercial buildings", "Mixed-use spaces", "Institutional developments"],
   },
   {
     code: "04",
-    title: "Construction",
+    title: "Interior",
     summary:
-      "Construction management and site supervision delivered through chartered professionals and CIDA-registered contractors.",
-    points: ["Construction management", "Construction supervision", "Quality assurance"],
+      "Interior design and detailing that create refined, practical and high-performing spaces for everyday use.",
+    points: ["Interior design", "Space planning", "Material coordination"],
   },
   {
     code: "05",
-    title: "Development",
+    title: "Renovations",
     summary:
-      "Hospitality, residential and commercial development managed from land assessment to handover.",
-    points: ["Hospitality", "Residential", "Commercial"],
+      "Transforming existing spaces through sensitive upgrades, upgrades and efficient reconfiguration that improve performance and appearance.",
+    points: ["Home renovations", "Building upgrades", "Refurbishment"],
   },
   {
     code: "06",
     title: "Property Management",
     summary:
-      "Maintenance, asset management and dedicated support for overseas clients investing in Sri Lanka.",
-    points: ["Maintenance", "Asset management", "Overseas client support"],
+      "Ongoing property oversight, coordination and maintenance support to protect asset value and resident experience.",
+    points: ["Property oversight", "Maintenance management", "Asset care"],
+  },
+  {
+    code: "07",
+    title: "Maintenance",
+    summary:
+      "Reliable maintenance planning and execution to keep buildings performing properly and safely over time.",
+    points: ["Preventive maintenance", "Repair coordination", "Building upkeep"],
+  },
+  {
+    code: "08",
+    title: "Manufacturing",
+    summary:
+      "Production-focused facilities and industrial spaces designed to support safe, efficient operations and future expansion.",
+    points: ["Industrial facilities", "Production spaces", "Operational planning"],
   },
 ] as const;
 

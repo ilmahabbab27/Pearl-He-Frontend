@@ -1,24 +1,7 @@
-import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { company } from "@/data/company";
 
-const title = "Contact | Pearl Heritance (Pvt) Ltd, Nawala & Nugegoda";
-const description =
-  "Contact Pearl Heritance for design, build and project management consultancy in Sri Lanka. Offices in Nawala and Nugegoda. Email info@pearlhe.com.";
-
-export const Route = createFileRoute("/contact")({
-  head: () => ({
-    meta: [
-      { title },
-      { name: "description", content: description },
-      { property: "og:title", content: title },
-      { property: "og:description", content: description },
-    ],
-  }),
-  component: ContactPage,
-});
-
-function ContactPage() {
+export default function ContactPage() {
   const [form, setForm] = useState({ name: "", email: "", phone: "", message: "" });
 
   const mailto = `mailto:${company.email}?subject=${encodeURIComponent(
