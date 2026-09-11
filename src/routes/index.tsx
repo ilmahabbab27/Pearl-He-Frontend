@@ -1,110 +1,17 @@
-import { useMemo, useState } from "react";
+import ProjectDeliveryProcess from "@/components/project-delivery-process";
+import WhatWeDo from "@/components/what-we-do";
+import WhyChooseSection from "@/components/why-choose-section";
 import { Link } from "react-router-dom";
+import { MessagesSquare, Monitor, ClipboardList, UsersRound, Construction, Building2, BadgeCheck, CircleDollarSign, Clock3, ArrowRight } from "lucide-react";
 import heroImage from "@/assets/hero-architecture.jpg";
-import projectResidential from "@/assets/project-residential.jpg";
-import projectCommercial from "@/assets/project-commercial.jpg";
-import projectHospitality from "@/assets/project-hospitality.jpg";
-import projectInterior from "@/assets/project-interior.jpg";
-import { company, process, values } from "@/data/company";
+import { company, values } from "@/data/company";
 
-const integratedServices = [
-  {
-    title: "DESIGN",
-    items: ["Architectural Design", "Interior Design", "Landscape Design"],
-    icon: "design",
-  },
-  {
-    title: "CONSULTANCY",
-    items: ["Engineering Consultancy", "Quantity Surveying", "Feasibility Studies"],
-    icon: "consultancy",
-  },
-  {
-    title: "PROJECT\nMANAGEMENT",
-    items: ["Planning", "Cost Management", "Tender Documentation", "Contractor Selection"],
-    icon: "project",
-  },
-  {
-    title: "CONSTRUCTION",
-    items: ["Construction Management", "Construction Supervision"],
-    icon: "construction",
-  },
-  {
-    title: "DESIGN & BUILD",
-    items: [],
-    icon: "design-build",
-  },
-  {
-    title: "DEVELOPMENT",
-    items: ["Hospitality", "Residential", "Commercial"],
-    icon: "development",
-  },
-  {
-    title: "PROPERTY\nMANAGEMENT",
-    items: ["Maintenance", "Asset Management"],
-    icon: "property",
-  },
-  {
-    title: "OVERSEAS CLIENT\nSUPPORT",
-    items: [],
-    icon: "support",
-  },
-] as const;
 
-const projects = [
-  {
-    slug: "residence-at-nawala",
-    name: "Residence at Nawala",
-    sector: "Residential",
-    detail: "Design & build · 2,800 sqft",
-    image: projectResidential,
-    alt: "Modern private residence at Nawala",
-  },
-  {
-    slug: "mini-apartment-complex-dehiwala",
-    name: "Mini Apartment Complex, Dehiwala",
-    sector: "Commercial",
-    detail: "Project management · Multi-unit development",
-    image: projectCommercial,
-    alt: "Commercial apartment complex in Dehiwala",
-  },
-  {
-    slug: "eco-lodge-retreat",
-    name: "Eco Lodge Retreat",
-    sector: "Hospitality",
-    detail: "Design consultancy · Construction supervision",
-    image: projectHospitality,
-    alt: "Eco lodge retreat in the hill country",
-  },
-  {
-    slug: "cafe-retail-fit-outs-colombo",
-    name: "Café & Retail Fit-Outs, Colombo",
-    sector: "Interiors",
-    detail: "Interior design & built · Custom joinery",
-    image: projectInterior,
-    alt: "Café interior fit-out in Colombo",
-  },
-] as const;
 
-const filters = ["All", "Residential", "Commercial", "Hospitality", "Interiors"] as const;
+// Enable when the home page insights section is ready to return.
+const showLatestInsights = false;
 
 export default function Home() {
-  const [activeFilter, setActiveFilter] = useState<(typeof filters)[number]>("All");
-  const [search, setSearch] = useState("");
-
-  const visibleProjects = useMemo(() => {
-    const query = search.trim().toLowerCase();
-
-    return projects.filter((project) => {
-      const matchesFilter = activeFilter === "All" || project.sector === activeFilter;
-      const matchesSearch =
-        query.length === 0 ||
-        project.name.toLowerCase().includes(query) ||
-        project.detail.toLowerCase().includes(query) ||
-        project.sector.toLowerCase().includes(query);
-
-      return matchesFilter && matchesSearch;
-    });
-  }, [activeFilter, search]);
   return (
     <>
       <section className="relative overflow-hidden border-b border-border px-6 pt-24 pb-28">
@@ -171,239 +78,65 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="px-6 py-28">
+      <WhatWeDo />
+
+      <section className="border-y border-border bg-background px-6 py-20">
         <div className="mx-auto max-w-7xl">
-          <div className="mb-8 flex flex-col gap-5 border border-border bg-card p-5 md:flex-row md:items-center md:justify-between">
-            <div className="flex flex-wrap gap-2">
-              {filters.map((filter) => (
-                <button
-                  key={filter}
-                  type="button"
-                  onClick={() => setActiveFilter(filter)}
-                  className={`px-4 py-2 text-[10px] font-bold uppercase tracking-widest transition-colors ${
-                    activeFilter === filter
-                      ? "bg-primary text-primary-foreground"
-                      : "border border-input bg-background text-foreground hover:border-accent hover:text-accent"
-                  }`}
-                >
-                  {filter}
-                </button>
-              ))}
-            </div>
-
-            <div className="w-full max-w-md">
-              <label className="sr-only" htmlFor="project-search-home">
-                Search projects
-              </label>
-              <input
-                id="project-search-home"
-                type="search"
-                value={search}
-                onChange={(event) => setSearch(event.target.value)}
-                placeholder="Search projects..."
-                className="w-full border border-input bg-background px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:border-accent focus:outline-none"
-              />
-            </div>
+          <h2 className="text-4xl font-bold uppercase tracking-tight text-primary md:text-5xl">Our Approach</h2>
+          <div className="mt-5 h-px max-w-md bg-border"><div className="h-px w-36 bg-accent" /></div>
+          <p className="mt-8 text-2xl font-medium leading-relaxed">
+            <span className="text-accent">One</span> Client. One Coordinated Team.<br />
+            <span className="text-accent">One</span> Point of Responsibility.
+          </p>
+          <p className="mt-3 max-w-6xl text-lg leading-relaxed text-muted-foreground">
+            At Pearl Heritance, every project is managed through a single coordinated team, ensuring seamless communication and professional oversight from concept to completion.
+          </p>
+          <div className="mt-10 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-6">
+            {[
+              { title: "Consult", icon: MessagesSquare, text: "Understanding your vision, requirements and objectives through in-depth consultation." },
+              { title: "Design", icon: Monitor, text: "Creating innovative, functional and sustainable design solutions tailored to your needs." },
+              { title: "Plan", icon: ClipboardList, text: "Detailed planning, budgeting and resource allocation for efficient project execution." },
+              { title: "Manage", icon: UsersRound, text: "Coordinating teams, monitoring progress and ensuring quality and compliance at every stage." },
+              { title: "Build", icon: Construction, text: "Executing construction with precision, safety and quality to bring the vision to life." },
+              { title: "Handover", icon: Building2, text: "Delivering a completed project with documentation, training and ongoing support." },
+            ].map((item, index) => (
+              <article key={item.title} className="relative">
+                <div className="mb-4 flex h-20 w-20 items-center justify-center rounded-full border border-border text-muted-foreground">
+                  <item.icon className="h-10 w-10" strokeWidth={1.2} aria-hidden="true" />
+                </div>
+                {index < 5 && <ArrowRight className="absolute right-0 top-7 hidden h-6 w-6 text-accent lg:block" strokeWidth={1} aria-hidden="true" />}
+                <div className="text-2xl font-light">{String(index + 1).padStart(2, "0")}</div>
+                <h3 className="mb-2 text-lg font-bold uppercase">{item.title}</h3>
+                <p className="text-sm leading-relaxed text-muted-foreground">{item.text}</p>
+              </article>
+            ))}
           </div>
-
-          {visibleProjects.length === 0 ? (
-            <div className="border border-border bg-card p-12 text-center">
-              <h2 className="text-2xl font-black uppercase tracking-tight">No projects found</h2>
-              <p className="mt-4 text-muted-foreground">
-                Try another keyword or switch back to a different filter.
-              </p>
-            </div>
-          ) : (
-            <div className="grid max-w-7xl grid-cols-1 gap-12 md:grid-cols-2">
-              {visibleProjects.map((p) => (
-                <article key={p.name}>
-                  <div className="relative">
-                    <Link to={`/projects/${p.slug}`}>
-                      <img
-                        src={p.image}
-                        alt={p.alt}
-                        loading="lazy"
-                        width={1200}
-                        height={900}
-                        className="aspect-[4/3] w-full object-cover"
-                      />
-                    </Link>
-                    <span className="absolute right-4 top-4 bg-white/90 px-3 py-2 font-mono text-[10px] uppercase tracking-[0.2em] text-primary shadow-sm ring-1 ring-primary/20 backdrop-blur-sm">
-                      {p.sector}
-                    </span>
+          <div className="mt-8 border-t border-border pt-6">
+            <h3 className="mb-7 text-center text-xl font-medium">Built On Three Strong Pillars</h3>
+            <div className="grid gap-8 md:grid-cols-3">
+              {[
+                { title: "Quality", icon: BadgeCheck, text: "We are committed to the highest standards of quality in design, construction and service delivery." },
+                { title: "Cost", icon: CircleDollarSign, text: "We deliver value through efficient planning, cost control and transparent management." },
+                { title: "Time", icon: Clock3, text: "We respect time by ensuring timely delivery through effective planning and execution." },
+              ].map((item) => (
+                <article key={item.title} className="flex items-start gap-4">
+                  <div className="flex h-20 w-20 shrink-0 items-center justify-center rounded-full border border-border text-muted-foreground">
+                    <item.icon className="h-10 w-10" strokeWidth={1.2} aria-hidden="true" />
                   </div>
-                  <div className="mt-6 flex items-start justify-between gap-6">
-                    <div>
-                      <Link to={`/projects/${p.slug}`} className="font-bold uppercase hover:text-accent">
-                        {p.name}
-                      </Link>
-                      <p className="text-xs text-muted-foreground">{p.detail}</p>
-                    </div>
+                  <div>
+                    <h4 className="mb-2 text-lg font-medium uppercase">{item.title}</h4>
+                    <p className="text-sm leading-relaxed text-muted-foreground">{item.text}</p>
                   </div>
                 </article>
               ))}
             </div>
-          )}
-        </div>
-      </section>
-
-      <section className="px-6 py-28">
-        <div className="mx-auto max-w-7xl">
-          <div className="mb-10 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
-            <div>
-              <div className="mb-3 font-mono text-[10px] uppercase tracking-[0.2em] text-accent">
-                01 // SERVICES
-              </div>
-              <h2 className="text-4xl font-black uppercase tracking-tighter md:text-5xl">
-                Integrated Building Solutions
-              </h2>
-            </div>
-            <div className="max-w-xl text-base leading-relaxed text-muted-foreground">
-              End-to-end expertise across design, project delivery and operational support.
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-4">
-            {integratedServices.map((service) => (
-              <article
-                key={service.title}
-                className="group flex min-h-[300px] flex-col border border-border bg-card p-7 transition-all duration-200 hover:-translate-y-1 hover:border-accent/60 hover:shadow-[0_16px_35px_rgba(20,52,79,0.08)]"
-              >
-                <div className="mb-6 flex justify-start">
-                  <div className="flex h-16 w-16 items-center justify-center rounded-full border border-border bg-background text-foreground transition-colors group-hover:border-accent group-hover:text-accent">
-                    <svg
-                      viewBox="0 0 64 64"
-                      className="h-8 w-8 stroke-[1.7]"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      aria-hidden="true"
-                    >
-                      {service.icon === "design" && (
-                        <>
-                          <path d="M18 45V24l14-12 14 12v21" />
-                          <path d="M22 29h20M22 35h20M26 45V39h12v6" />
-                        </>
-                      )}
-                      {service.icon === "consultancy" && (
-                        <>
-                          <circle cx="18" cy="24" r="7" />
-                          <circle cx="32" cy="18" r="7" />
-                          <circle cx="46" cy="24" r="7" />
-                          <path d="M10 45c2-6 8-10 16-10s14 4 16 10" />
-                          <path d="M24 45c2-6 7-10 13-10s11 4 13 10" />
-                        </>
-                      )}
-                      {service.icon === "project" && (
-                        <>
-                          <path d="M20 18h24v28H20z" />
-                          <path d="M24 18V12h16v6M24 28h16M24 34h10" />
-                          <path d="M18 46h28" />
-                        </>
-                      )}
-                      {service.icon === "construction" && (
-                        <>
-                          <path d="M18 44V20h28v24" />
-                          <path d="M22 26h20M22 32h20M22 38h16" />
-                          <path d="M14 44h36" />
-                          <path d="M30 12l6 8h-12l6-8z" />
-                        </>
-                      )}
-                      {service.icon === "design-build" && (
-                        <>
-                          <path d="M16 44V22h16l16 10v12" />
-                          <path d="M20 22V16h12v6M28 18h8" />
-                          <path d="M22 30h20M22 36h20" />
-                        </>
-                      )}
-                      {service.icon === "development" && (
-                        <>
-                          <path d="M20 42V20h24v22" />
-                          <path d="M16 26h6M42 26h6M16 42h32" />
-                          <path d="M28 20v22M36 20v22" />
-                        </>
-                      )}
-                      {service.icon === "property" && (
-                        <>
-                          <circle cx="32" cy="22" r="8" />
-                          <path d="M18 44c2-6 7-10 14-10s12 4 14 10" />
-                          <path d="M16 26l16-10 16 10" />
-                        </>
-                      )}
-                      {service.icon === "support" && (
-                        <>
-                          <circle cx="32" cy="24" r="10" />
-                          <path d="M22 42c2-6 6-8 10-8s8 2 10 8" />
-                          <path d="M12 28c2-8 8-14 20-14s18 6 20 14" />
-                        </>
-                      )}
-                    </svg>
-                  </div>
-                </div>
-
-                <h3 className="mb-5 whitespace-pre-line text-2xl font-black uppercase leading-tight tracking-tight text-foreground">
-                  {service.title}
-                </h3>
-
-                {service.items.length > 0 && (
-                  <ul className="space-y-2 text-sm leading-relaxed text-muted-foreground">
-                    {service.items.map((item) => (
-                      <li key={item} className="flex items-start gap-2">
-                        <span className="mt-2 inline-block h-1.5 w-1.5 rounded-full bg-accent" />
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </article>
-            ))}
           </div>
         </div>
       </section>
 
-      <section className="px-6 py-28">
-        <div className="mx-auto max-w-7xl">
-          <div className="mb-14 flex flex-wrap items-end justify-between gap-6">
-            <h2 className="text-4xl font-black uppercase tracking-tighter">Why Pearl Heritance</h2>
-            <span className="font-mono text-[10px] text-muted-foreground">
-              02 // OUR ADVANTAGE
-            </span>
-          </div>
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-4">
-            {[
-              {
-                number: "01",
-                title: "Client-first guidance",
-                body: "We begin with the goal, budget and feasibility, then shape a practical route to delivery.",
-              },
-              {
-                number: "02",
-                title: "Single point of responsibility",
-                body: "From design coordination to project execution, our team keeps every moving part aligned.",
-              },
-              {
-                number: "03",
-                title: "Built for long-term value",
-                body: "Every decision balances quality, durability, lifestyle and future performance.",
-              },
-              {
-                number: "04",
-                title: "Trusted local expertise",
-                body: "We understand Sri Lankan standards, market realities and the expectations of modern living.",
-              },
-            ].map((item) => (
-              <div key={item.title} className="rounded-none border border-border bg-card p-8">
-                <div className="mb-6 font-mono text-[10px] uppercase tracking-[0.2em] text-accent">
-                  {item.number}
-                </div>
-                <h3 className="mb-4 text-lg font-bold uppercase tracking-tight">{item.title}</h3>
-                <p className="text-sm leading-relaxed text-muted-foreground">{item.body}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <ProjectDeliveryProcess headingLevel="h2" />
+
+      <WhyChooseSection />
 
       <section className="border-y border-border bg-card px-6 py-28">
         <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[1.2fr_0.8fr]">
@@ -437,105 +170,9 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="bg-[#003b63] px-6 py-24 text-white">
-        <div className="mx-auto max-w-7xl">
-          <h2 className="mb-6 text-5xl font-black uppercase tracking-[-0.04em] text-white md:text-7xl">
-            PROJECT DELIVERY PROCESS
-          </h2>
 
-          <p className="mb-16 max-w-3xl text-xl leading-relaxed text-white/80 md:text-2xl">
-            A proven process that ensures clarity, coordination and confidence at every stage of your
-            project.
-          </p>
 
-          <div className="grid grid-cols-1 gap-10 md:grid-cols-2 xl:grid-cols-3">
-            {[
-              {
-                step: "01",
-                title: "CONSULTATION",
-                text: "We listen, understand and assess your vision, requirements and objectives through in-depth consultation.",
-              },
-              {
-                step: "02",
-                title: "DESIGN &\nPLANNING",
-                text: "We transform ideas into functional, innovative and sustainable designs with detailed planning and technical expertise.",
-              },
-              {
-                step: "03",
-                title: "TEAM FORMATION",
-                text: "We assemble the right team of professionals and specialists to ensure seamless collaboration and project alignment.",
-              },
-              {
-                step: "04",
-                title: "CONTRACTS &\nPROJECT SETUP",
-                text: "We establish clear contracts, define roles, set timelines and implement systems to ensure a strong foundation for successful delivery.",
-              },
-              {
-                step: "05",
-                title: "CONSTRUCTION\nMANAGEMENT",
-                text: "We oversee construction with strict quality control, safety management and timely execution to bring your vision to life.",
-              },
-              {
-                step: "06",
-                title: "COMPLETION &\nAFTERCARE",
-                text: "We deliver with pride and provide ongoing aftercare and support to ensure long-term value and client satisfaction.",
-              },
-            ].map((item) => (
-              <article key={item.step} className="flex h-full flex-col">
-                <div className="mb-6 flex h-24 w-24 items-center justify-center border border-white/80 text-3xl font-black text-white">
-                  {item.step}
-                </div>
 
-                <h3 className="mb-4 text-2xl font-black uppercase leading-tight tracking-tight text-white whitespace-pre-line">
-                  {item.title}
-                </h3>
-
-                <p className="max-w-[18rem] text-base leading-relaxed text-white/80">{item.text}</p>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="border-t border-border bg-card px-6 py-28">
-        <div className="mx-auto max-w-7xl">
-          <div className="mb-16 flex flex-wrap items-end justify-between gap-6">
-            <div>
-              <div className="mb-4 font-mono text-[10px] uppercase tracking-[0.2em] text-accent">
-                04 // ARCHITECTURE FLOW
-              </div>
-              <h2 className="text-4xl font-black uppercase tracking-tighter">Tree-like project structure</h2>
-            </div>
-            <span className="font-mono text-[10px] text-muted-foreground">
-              INTEGRATED DELIVERY
-            </span>
-          </div>
-
-          <div className="relative overflow-hidden border border-border bg-background p-8 md:p-12">
-            <div className="absolute left-1/2 top-9 hidden h-16 w-px -translate-x-1/2 bg-accent/50 md:block" />
-            <div className="absolute left-1/4 top-1/2 hidden h-px w-1/2 bg-gradient-to-r from-accent/40 to-transparent md:block" />
-            <div className="absolute right-1/4 top-1/2 hidden h-px w-1/2 bg-gradient-to-l from-accent/40 to-transparent md:block" />
-
-            <div className="grid gap-8 md:grid-cols-5">
-              {[
-                { label: '01', title: 'Brief', body: 'Understanding your vision, priorities and site realities.' },
-                { label: '02', title: 'Design', body: 'Form, function and material decisions shaped by lifestyle and use.' },
-                { label: '03', title: 'Build', body: 'Coordinated execution with quality control and disciplined timelines.' },
-                { label: '04', title: 'Detail', body: 'Finishes, systems, and practical refinement to protect long-term value.' },
-                { label: '05', title: 'Handover', body: 'A complete, well-managed delivery ready for living and operation.' },
-              ].map((item) => (
-                <div key={item.title} className="relative z-10">
-                  <div className="mx-auto mb-5 flex h-14 w-14 items-center justify-center border border-accent bg-card text-lg font-black text-accent">
-                    {item.label}
-                  </div>
-                  <h3 className="mb-2 text-center text-sm font-bold uppercase tracking-widest">{item.title}</h3>
-                  <p className="text-center text-xs leading-relaxed text-muted-foreground">{item.body}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
 
       <section className="px-6 py-28">
         <div className="mx-auto max-w-7xl">
@@ -620,6 +257,7 @@ export default function Home() {
         </div>
       </section>
 
+      {showLatestInsights && (
       <section className="px-6 py-28">
         <div className="mx-auto max-w-7xl">
           <div className="mb-14 flex flex-wrap items-end justify-between gap-6">
@@ -657,6 +295,7 @@ export default function Home() {
           </div>
         </div>
       </section>
+      )}
 
       <section className="border-t border-border bg-card px-6 py-24">
         <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-8">

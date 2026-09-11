@@ -1,4 +1,8 @@
-import logo from "@/assets/logo-BqvBdEiO.svg";
+import NetworkCommitment from "@/components/network-commitment";
+import logo from "@/assets/pearl-mark.svg";
+import { Building2, Columns3, Construction, Settings, Zap, Calculator, Armchair, Sprout, Leaf, FireExtinguisher, Map, Scale, HardHat, Waves, ShieldCheck, Droplet, Sun, ArrowUpDown, UsersRound } from "lucide-react";
+import type { CSSProperties } from "react";
+import "./team.css";
 
 const professionalConsultants = [
   "Chartered Architects",
@@ -91,125 +95,79 @@ const iconMap: Record<string, JSX.Element> = {
   ),
 };
 
+const consultantIcons = [Building2, Columns3, Construction, Settings, Zap, Calculator, Armchair, Sprout, Leaf, FireExtinguisher, Map, Scale];
+const contractorIcons = [HardHat, Settings, Construction, Map, Waves, ShieldCheck, Droplet, Sun, ArrowUpDown];
+
 export default function TeamPage() {
   return (
-    <>
-      <section className="bg-[#f3f3f1] px-6 py-16 text-[#0c3b5d]">
-        <div className="mx-auto max-w-[1400px]">
-          <div className="grid items-start gap-10 lg:grid-cols-[1.05fr_1.2fr]">
-            <div>
-              <h1 className="text-[clamp(3rem,5vw,6rem)] font-black uppercase leading-[0.88] tracking-[-0.08em] text-[#0d3b5f]">
-                OUR PROFESSIONAL
-                <br />
-                NETWORK
-              </h1>
-              <div className="mt-6 h-[2px] w-full bg-[#1d7eb8]/60" />
-            </div>
+    <section className="network-page overflow-hidden bg-white pt-12 text-[#003763]">
+      <div className="mx-auto max-w-[1280px] px-6">
+        <h1 className="text-4xl font-bold uppercase leading-tight tracking-tight md:text-5xl">Our Professional<br />Network</h1>
+        <div className="mt-5 h-px max-w-[460px] bg-[#bfc0c4]"><div className="h-px w-40 bg-[#00b3e7]" /></div>
+        <p className="mb-4 mt-5 text-lg font-light leading-relaxed">A strong network of trusted professionals and specialized contractors, working together seamlessly to deliver exceptional results.</p>
 
-            <div className="hidden lg:block" />
-          </div>
+        <div className="network-diagram mx-auto max-w-[1100px]">
+          <svg className="network-connectors" viewBox="0 0 1000 430" preserveAspectRatio="none" fill="none" stroke="#bfc0c4" strokeWidth="1" aria-hidden="true">
+            {professionalConsultants.map((item, index) => {
+              const y = 49 + index * 32;
+              const x = 240 + index * 18;
+              const bend = 445 + Math.max(0, index - 6) * 8;
+              return <path key={item} d={`M${x} ${y}H${bend}V155H500`} />;
+            })}
+            {constructionNetwork.map((item, index) => {
+              const y = 49 + index * 32;
+              const x = 760 - index * 18;
+              const bend = 555 - Math.max(0, index - 6) * 8;
+              return <path key={item} d={`M${x} ${y}H${bend}V155H500`} />;
+            })}
+          </svg>
 
-          <p className="mt-6 max-w-[1180px] text-[clamp(1.15rem,1.8vw,2rem)] font-light leading-relaxed text-[#234b69]">
-            A strong network of trusted professionals and specialized contractors, working together
-            seamlessly to deliver exceptional results.
-          </p>
-        </div>
-      </section>
-
-      <section className="bg-[#f3f3f1] px-6 pb-16 pt-0 text-[#0c3b5d]">
-        <div className="mx-auto max-w-[1400px]">
-          <div className="relative grid gap-8 lg:grid-cols-[1fr_220px_1fr] lg:items-start">
-            <div className="space-y-4">
-              <div className="inline-flex items-center gap-3 rounded-full bg-[#0d3b5f] px-5 py-3 text-[0.8rem] font-black uppercase tracking-[0.2em] text-white">
-                <span className="flex h-7 w-7 items-center justify-center rounded-full bg-white/15">
-                  <svg viewBox="0 0 64 64" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                    <circle cx="22" cy="24" r="8" />
-                    <path d="M12 46c2-6 7-10 14-10s12 4 14 10" />
-                    <circle cx="42" cy="24" r="6" />
-                    <path d="M36 42c1-5 5-8 9-8" />
-                  </svg>
-                </span>
-                Professional Consultants
-              </div>
-
-              <div className="space-y-3">
-                {professionalConsultants.map((item) => (
-                  <div
-                    key={item}
-                    className="flex items-center gap-4 rounded-full border border-[#0d3b5f]/27 bg-white/70 px-4 py-3 text-[0.95rem] font-medium text-[#0c3b5d] shadow-[0_1px_0_rgba(13,59,93,0.08)]"
-                  >
-                    <span className="flex h-8 w-8 items-center justify-center rounded-full border border-[#0d87c8]/60 bg-[#eaf7ff] text-[#0d87c8]">
-                      <svg viewBox="0 0 64 64" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                        <path d="M18 46V20l14-10 14 10v26" />
-                        <path d="M22 28h20M22 34h20M22 40h14" />
-                      </svg>
-                    </span>
-                    {item}
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="relative z-10 flex items-center justify-center py-8 lg:py-0">
-              <div className="flex h-[200px] w-[200px] items-center justify-center">
-                <img
-                  src={logo}
-                  alt="Pearl Heritance logo"
-                  className="h-[150px] w-auto object-contain"
-                />
-              </div>
-            </div>
-
-            <div className="space-y-4">
-              <div className="inline-flex items-center gap-3 rounded-full bg-[#0d3b5f] px-5 py-3 text-[0.8rem] font-black uppercase tracking-[0.2em] text-white">
-                <span className="flex h-7 w-7 items-center justify-center rounded-full bg-white/15">
-                  <svg viewBox="0 0 64 64" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                    <path d="M16 50V20h16l16 12v18" />
-                    <path d="M20 20V14h12v6" />
-                    <path d="M22 34h20" />
-                  </svg>
-                </span>
-                Construction Network
-              </div>
-
-              <div className="space-y-3">
-                {constructionNetwork.map((item) => (
-                  <div
-                    key={item}
-                    className="flex items-center gap-4 rounded-full border border-[#0d3b5f]/27 bg-white/70 px-4 py-3 text-[0.95rem] font-medium text-[#0c3b5d] shadow-[0_1px_0_rgba(13,59,93,0.08)]"
-                  >
-                    <span className="flex h-8 w-8 items-center justify-center rounded-full border border-[#0d87c8]/60 bg-[#eaf7ff] text-[#0d87c8]">
-                      <svg viewBox="0 0 64 64" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                        <path d="M16 46V16h20l12 12v18" />
-                        <path d="M20 22h12M20 30h20M20 38h16" />
-                      </svg>
-                    </span>
-                    {item}
-                  </div>
-                ))}
-              </div>
+          <div className="network-center">
+            <div className="flex h-full w-full flex-col items-center justify-center rounded-full border border-[#bfc0c4] bg-white">
+              <img src={logo} alt="Pearl Heritance" width={90} height={96} className="h-24 w-[90px]" />
+              <p className="mt-2 text-center text-xs leading-tight text-black">Objective guidance<br />you make informed</p>
             </div>
           </div>
-        </div>
-      </section>
 
-      <section className="border-t border-[#0d3b5f]/20 bg-[#f3f3f1] px-6 pb-20 pt-8 text-[#0c3b5d]">
-        <div className="mx-auto max-w-[1400px]">
-          <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-5">
-            {benefits.map((item) => (
-              <div key={item.title} className="border border-[#0d3b5f]/25 bg-[#f7f7f6] p-5 text-center">
-                <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full border border-[#0d87c8]/60 bg-white text-[#0d87c8] shadow-sm">
-                  {iconMap[item.icon]}
-                </div>
-                <h3 className="mb-3 text-[0.75rem] font-black uppercase leading-relaxed tracking-[0.12em] whitespace-pre-line">
-                  {item.title}
-                </h3>
-                <p className="text-[0.85rem] leading-relaxed text-[#234b69]">{item.text}</p>
-              </div>
-            ))}
+          <div className="network-group">
+            <h2 className="network-label network-label-left"><UsersRound size={22} strokeWidth={1} aria-hidden="true" />Professional Consultants</h2>
+            <ul className="network-list">
+              {professionalConsultants.map((item, index) => {
+                const Icon = consultantIcons[index];
+                return <li key={item} className="network-node network-node-left" style={{ "--position": index } as CSSProperties}>
+                  <span className="network-node-icon"><Icon size={21} strokeWidth={1} aria-hidden="true" /></span>
+                  <span>{item}</span>
+                </li>;
+              })}
+            </ul>
+          </div>
+
+          <div className="network-group">
+            <h2 className="network-label network-label-right"><HardHat size={22} strokeWidth={1} aria-hidden="true" />Construction Network</h2>
+            <ul className="network-list">
+              {constructionNetwork.map((item, index) => {
+                const Icon = contractorIcons[index];
+                return <li key={item} className="network-node network-node-right" style={{ "--position": index } as CSSProperties}>
+                  <span className="network-node-icon"><Icon size={21} strokeWidth={1} aria-hidden="true" /></span>
+                  <span>{item}</span>
+                </li>;
+              })}
+            </ul>
           </div>
         </div>
-      </section>
-    </>
+
+        <div className="mx-auto grid max-w-[1100px] gap-6 border-t border-[#bfc0c4] pb-8 pt-4 sm:grid-cols-2 lg:grid-cols-5 lg:gap-0 lg:divide-x lg:divide-[#bfc0c4]">
+          {benefits.map(item => (
+            <article key={item.title} className="px-4 text-center">
+              <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full border border-[#bfc0c4] text-[#a8aaae]">{iconMap[item.icon]}</div>
+              <h3 className="mb-2 whitespace-pre-line text-xs font-bold uppercase leading-tight text-[#303b46]">{item.title}</h3>
+              <p className="text-xs leading-relaxed">{item.text}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+      <NetworkCommitment />
+      <div className="bg-[#003763] px-6 py-4 text-sm text-white"><p className="mx-auto max-w-[1232px]">BUILDING TRUST. DELIVERING EXCELLENCE.</p></div>
+    </section>
   );
 }

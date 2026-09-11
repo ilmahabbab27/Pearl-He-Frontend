@@ -10,6 +10,7 @@ import ServicesPage from './routes/services'
 import ProjectsPage from './routes/projects'
 import ProjectDetailPage from './routes/project-detail'
 import TeamPage from './routes/team'
+import ContractDocumentationPage from './routes/contract-documentation'
 import TestimonialsPage from './routes/testimonials'
 import BlogsPage from './routes/blogs'
 import BlogDetailPage from './routes/blog-detail'
@@ -214,6 +215,7 @@ function App() {
             <Route path="/projects" element={<PageLayout><ProjectsPage /></PageLayout>} />
             <Route path="/projects/:slug" element={<PageLayout><ProjectDetailPage /></PageLayout>} />
             <Route path="/team" element={<PageLayout><TeamPage /></PageLayout>} />
+            <Route path="/contract-documentation" element={<PageLayout><ContractDocumentationPage /></PageLayout>} />
             <Route path="/testimonials" element={<PageLayout><TestimonialsPage /></PageLayout>} />
             <Route path="/blogs" element={<PageLayout><BlogsPage /></PageLayout>} />
             <Route path="/blogs/:slug" element={<PageLayout><BlogDetailPage /></PageLayout>} />

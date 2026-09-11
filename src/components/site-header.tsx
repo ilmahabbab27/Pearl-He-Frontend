@@ -7,7 +7,8 @@ const links = [
   { to: "/", label: "Home" },
   { to: "/services", label: "Services" },
   { to: "/projects", label: "Projects" },
-  { to: "/team", label: "Team" },
+  { to: "/team", label: "Network" },
+  { to: "/contract-documentation", label: "Contract Documentation" },
   { to: "/testimonials", label: "Testimonials" },
   { to: "/blogs", label: "Blogs" },
   { to: "/about", label: "About" },
@@ -20,11 +21,11 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-background/85 backdrop-blur-md">
       <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6">
-        <Link to="/" className="flex items-center" onClick={() => setOpen(false)}>
+        <Link to="/" className="flex shrink-0 items-center" onClick={() => setOpen(false)}>
           <img src={logo} alt="Pearl Heritance logo" className="h-12 w-auto" />
         </Link>
 
-        <nav className="hidden gap-10 text-xs font-semibold uppercase tracking-widest md:flex">
+        <nav className="hidden items-center gap-5 text-[11px] font-semibold uppercase tracking-wide xl:flex">
           {links.map((l) => (
             <NavLink
               key={l.to}
@@ -41,7 +42,7 @@ export function SiteHeader() {
 
         <Link
           to="/contact"
-          className="hidden bg-primary px-6 py-3 text-[10px] font-bold uppercase tracking-widest text-primary-foreground transition-colors hover:bg-accent lg:inline-block"
+          className="hidden bg-primary px-6 py-3 text-[10px] font-bold uppercase tracking-widest text-primary-foreground transition-colors hover:bg-accent 2xl:inline-block"
         >
           Start a Consultation
         </Link>
@@ -49,7 +50,7 @@ export function SiteHeader() {
         <button
           type="button"
           aria-label={open ? "Close menu" : "Open menu"}
-          className="md:hidden"
+          className="xl:hidden"
           onClick={() => setOpen((v) => !v)}
         >
           {open ? <X className="size-6" /> : <Menu className="size-6" />}
@@ -57,7 +58,7 @@ export function SiteHeader() {
       </div>
 
       {open && (
-        <nav className="border-t border-border bg-card px-6 py-4 md:hidden">
+        <nav className="border-t border-border bg-card px-6 py-4 xl:hidden">
           {links.map((l) => (
             <NavLink
               key={l.to}

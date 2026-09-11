@@ -1,546 +1,108 @@
-import { Link } from "react-router-dom";
-import projectResidential from "@/assets/project-residential.jpg";
-import projectCommercial from "@/assets/project-commercial.jpg";
-import projectHospitality from "@/assets/project-hospitality.jpg";
-import projectInterior from "@/assets/project-interior.jpg";
+import { ShieldCheck, UserRound, Lightbulb, BadgeCheck, Search, UsersRound, Leaf, Handshake, Trophy, ChartNoAxesCombined, Target, Eye, PencilRuler, Construction, ClipboardList, Quote } from "lucide-react";
+import type { ReactNode } from "react";
 
-const stats = [
-  { value: "20+", label: "Years" },
-  { value: "250+", label: "Projects" },
-  { value: "6+", label: "Disciplines" },
-  { value: "100%", label: "Professional" },
-] as const;
+const boardValues = [
+  { label: "Professionalism", icon: ShieldCheck },
+  { label: "Integrity", icon: Handshake },
+  { label: "Accountability", icon: ChartNoAxesCombined },
+  { label: "Innovation", icon: Lightbulb },
+  { label: "Sustainability", icon: Leaf },
+  { label: "Excellence", icon: Trophy },
+];
+const coreValues = [
+  { label: "Integrity", icon: ShieldCheck },
+  { label: "Professionalism", icon: UserRound },
+  { label: "Innovation", icon: Lightbulb },
+  { label: "Quality", icon: BadgeCheck },
+  { label: "Transparency", icon: Search },
+  { label: "Collaboration", icon: UsersRound },
+  { label: "Sustainability", icon: Leaf },
+  { label: "Client Satisfaction", icon: Handshake },
+];
 
-const projectHighlights = [
-  {
-    name: "Housing scheme",
-    location: "Kandy",
-    type: "Residential",
-    image: projectResidential,
-  },
-  {
-    name: "Tourist Amenities & eco-friendly buildings",
-    location: "Ella",
-    type: "Tourism",
-    image: projectHospitality,
-  },
-  {
-    name: "Apartment Complex",
-    location: "Dehiwala",
-    type: "Commercial",
-    image: projectCommercial,
-  },
-  {
-    name: "Prime Digital",
-    location: "Interior",
-    type: "Interior",
-    image: projectInterior,
-  },
-] as const;
-
-const strengths = [
-  {
-    title: "Client-Focused",
-    description:
-      "We identify core needs and deliver tailored solutions aligned with your budget, priorities, and timeline.",
-  },
-  {
-    title: "Qualified Team",
-    description:
-      "A multi-disciplinary team including architects, engineers, finance consultants, business advisors, marketers, and legal professionals.",
-  },
-  {
-    title: "Reliable Delivery",
-    description:
-      "Structured planning, transparent reporting, and accountability — ensuring a smooth, hassle-free experience.",
-  },
-  {
-    title: "Value Enhancement",
-    description:
-      "We align your property with market demands to strengthen usability, positioning, and long-term commercial value.",
-  },
-] as const;
-
-const services = [
-  {
-    title: "DESIGN",
-    items: ["Architectural Design", "Interior Design", "Landscape Design"],
-    icon: "design",
-  },
-  {
-    title: "CONSULTANCY",
-    items: ["Engineering Consultancy", "Quantity Surveying", "Feasibility Studies"],
-    icon: "consultancy",
-  },
-  {
-    title: "PROJECT\nMANAGEMENT",
-    items: ["Planning", "Cost Management", "Tender Documentation", "Contractor Selection"],
-    icon: "project",
-  },
-  {
-    title: "CONSTRUCTION",
-    items: ["Construction Management", "Construction Supervision"],
-    icon: "construction",
-  },
-  {
-    title: "DESIGN & BUILD",
-    items: [],
-    icon: "design-build",
-  },
-  {
-    title: "DEVELOPMENT",
-    items: ["Hospitality", "Residential", "Commercial"],
-    icon: "development",
-  },
-  {
-    title: "PROPERTY\nMANAGEMENT",
-    items: ["Maintenance", "Asset Management"],
-    icon: "property",
-  },
-  {
-    title: "OVERSEAS CLIENT\nSUPPORT",
-    items: [],
-    icon: "support",
-  },
-] as const;
-
-const faqItems = [
-  {
-    question: "How Long Does A Typical Project Take?",
-    answer:
-      "Project timelines vary depending on scope, complexity, and approvals. On average, design projects may take 2–6 weeks, while full builds depend on construction phases.",
-  },
-  {
-    question: "What Services Do You Offer?",
-    answer:
-      "We provide construction project consultation, property development, property management, construction services, renovations and extensions, and strategic business advisory for projects.",
-  },
-] as const;
+function SectionHeading({ children }: { children: ReactNode }) {
+  return <div className="mb-10"><h2 className="text-3xl font-bold uppercase leading-tight tracking-tight text-[#003763] md:text-4xl">{children}</h2><div className="mt-5 h-px max-w-[520px] bg-[#bfc0c4]"><div className="h-px w-36 bg-[#00b3e7]" /></div></div>;
+}
 
 export default function AboutPage() {
   return (
-    <>
-      <section className="border-b border-border px-6 py-24">
+    <div className="bg-white text-[#24415c]">
+      <section className="px-6 py-16 md:py-20" aria-labelledby="philosophy-heading">
         <div className="mx-auto max-w-7xl">
-          <div className="mb-6 font-mono text-[10px] uppercase tracking-widest text-accent">
-            About Pearl Heritance
-          </div>
-          <h1 className="max-w-4xl text-5xl font-black tracking-tight text-balance md:text-6xl">
-            Building lasting value through practical expertise.
-          </h1>
-          <p className="mt-8 max-w-3xl text-lg text-muted-foreground">
-            Pearl Heritance (Pvt) Ltd. is a well-established company (Reg. No. PV 00309762) based
-            in the Western Province of Sri Lanka. We specialize in construction project
-            consultation, property development, property management, and construction services.
-          </p>
+          <h1 id="philosophy-heading" className="text-4xl font-bold uppercase leading-tight tracking-tight text-[#003763] md:text-5xl">Our<br />Philosophy</h1>
+          <div className="mt-5 h-px w-48 bg-[#bfc0c4]"><div className="h-px w-16 bg-[#00b3e7]" /></div>
+          <blockquote className="relative mt-12 max-w-4xl pl-8 md:pl-12">
+            <Quote className="absolute -left-1 -top-5 h-9 w-9 rotate-180 fill-[#a8aaae] text-[#a8aaae]" aria-hidden="true" />
+            <p className="text-xl font-light leading-[1.8] md:text-2xl">At Pearl Heritance, we believe that every successful project begins with a clear vision, professional guidance, thoughtful planning, and responsible execution.</p>
+            <p className="mt-8 text-xl font-light leading-[1.8] md:text-2xl">Through our consultant-led Design-Manage-Build approach, we transform ideas into sustainable, functional, and lasting developments while building enduring relationships founded on trust, integrity, and excellence.</p>
+            <Quote className="ml-auto mt-3 h-9 w-9 fill-[#a8aaae] text-[#a8aaae]" aria-hidden="true" />
+          </blockquote>
         </div>
       </section>
 
-      <section className="px-6 py-24">
+      <section className="border-t border-[#bfc0c4]/50 px-6 py-16">
         <div className="mx-auto max-w-7xl">
-          <div className="grid gap-8 md:grid-cols-2">
+          <SectionHeading>Message From<br />the Board of Directors</SectionHeading>
+          <div className="grid gap-10 lg:grid-cols-[230px_1fr]">
+            <aside aria-label="Our values">
+              <h3 className="mb-6 text-2xl font-medium text-[#303b46]">Our Values</h3>
+              <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-1">
+                {boardValues.map(value => <li key={value.label} className="flex items-center gap-3"><span className="flex h-12 w-12 shrink-0 items-center justify-center border border-[#bfc0c4] text-[#a8aaae]"><value.icon size={34} strokeWidth={1} aria-hidden="true" /></span><span className="text-xl font-light text-[#303b46]">{value.label}</span></li>)}
+              </ul>
+            </aside>
             <div>
-              <div className="mb-6 font-mono text-[10px] uppercase tracking-widest text-accent">
-                Who we are
+              <h3 className="mb-4 text-2xl font-medium text-[#303b46]">Welcome to Pearl Heritance (Pvt) Ltd.</h3>
+              <div className="space-y-6 text-base font-light leading-relaxed md:columns-2 md:gap-10">
+                <p>At Pearl Heritance, we believe that every property represents an opportunity to create lasting value. Whether it is a new development, a renovation, an investment, or the long-term management of a property, our mission is to deliver professional solutions that inspire confidence and exceed expectations.</p>
+                <p>Our journey has been shaped by more than two decades of experience in the construction and property industry. Throughout these years, we have observed that many projects face unnecessary challenges due to a lack of professional coordination, transparent project management, and reliable technical guidance. These experiences inspired us to establish Pearl Heritance as a consultant-led organization dedicated to providing integrated property and construction solutions with professionalism, integrity, and accountability.</p>
+                <p>What distinguishes Pearl Heritance is our collaborative approach. Rather than relying on a fixed team, we bring together the most suitable architects, engineers, quantity surveyors, specialist consultants, and construction partners for each project. This enables us to deliver tailored solutions that meet our clients' unique requirements while maintaining the highest standards of quality, cost efficiency, and timely delivery.</p>
+                <p>As the construction industry continues to evolve, we remain committed to innovation, sustainability, and continuous improvement. Our goal is not simply to complete projects, but to build lasting relationships founded on trust, transparency, and exceptional service.</p>
+                <p>We extend our sincere appreciation to our clients, business partners, and professional associates for the confidence they place in us. We look forward to continuing our journey together and transforming ideas into successful developments that create enduring value for generations to come.</p>
+                <p className="break-inside-avoid">Board of Directors<br />Pearl Heritance (Pvt) Ltd.</p>
               </div>
-              <p className="text-lg leading-relaxed text-muted-foreground">
-                For the past twenty years, we’ve observed that many properties in Sri Lanka are not
-                utilized to their fullest potential. There is also a clear gap in trusted professional
-                property management services.
-              </p>
-              <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
-                By analyzing market requirements, we deliver practical solutions that improve
-                performance and enhance long-term commercial value.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-2 gap-4">
-              {stats.map((stat) => (
-                <div key={stat.label} className="border border-border bg-card p-8 text-center">
-                  <div className="text-4xl font-black tracking-tight">{stat.value}</div>
-                  <div className="mt-3 font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
-                    {stat.label}
-                  </div>
-                </div>
-              ))}
             </div>
           </div>
         </div>
       </section>
 
-      <section className="bg-card px-6 py-24">
+      <section className="border-t border-[#bfc0c4]/50 px-6 py-16">
         <div className="mx-auto max-w-7xl">
-          <div className="mb-12 max-w-3xl">
-            <div className="mb-6 font-mono text-[10px] uppercase tracking-widest text-accent">
-              Our Professional Network
+          <SectionHeading>Who We Are</SectionHeading>
+          <div className="grid gap-10 md:grid-cols-2">
+            <div className="max-w-xl">
+              <h3 className="mb-5 text-2xl font-medium leading-relaxed text-[#303b46]">Building Vision Through<br />Professional Consultancy</h3>
+              <p className="text-base font-light leading-relaxed">Pearl Heritance (PVT) Ltd is a Design Build and Project Management Consultancy delivering integrated solutions across architecture, engineering, project planning, construction coordination, and development management.</p>
+              <p className="mt-6 text-base font-light leading-relaxed">We combine professional expertise, innovative thinking, and strategic project delivery to transform ideas into successful developments while maintaining the highest standards of quality, transparency, and client satisfaction.</p>
             </div>
-            <h2 className="text-4xl font-black uppercase tracking-tighter">
-              A trusted network of specialists
-            </h2>
-            <p className="mt-6 text-muted-foreground">
-              We work with a carefully selected network of architects, engineers, quantity surveyors,
-              project managers, consultants, and specialist partners to deliver integrated solutions
-              that align design, cost, quality, and project performance from concept through handover.
-            </p>
+            <div className="flex flex-col justify-between gap-8 border-l border-[#bfc0c4] pl-6 text-2xl font-medium uppercase text-[#303b46]">
+              {["Vision", "Coordinated Team", "Trusted Partner"].map(label => <p key={label}><span className="mb-1 block text-[#00b3e7]">One</span>{label}</p>)}
+            </div>
           </div>
-
-          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+          <div className="mt-12 grid gap-6 lg:grid-cols-3">
             {[
-              "Architecture",
-              "Engineering",
-              "Quantity Surveying",
-              "Project Management",
-              "Interior Design",
-              "Planning & Approvals",
-              "Finance & Feasibility",
-              "Legal & Compliance",
-            ].map((item) => (
-              <div
-                key={item}
-                className="border border-border bg-background p-5 font-mono text-[10px] uppercase tracking-[0.2em]"
-              >
-                {item}
-              </div>
-            ))}
-          </div>
-
-          <div className="mt-12 flex flex-wrap gap-4">
-            <Link
-              to="/contact"
-              className="bg-primary px-8 py-4 text-[10px] font-bold uppercase tracking-widest text-primary-foreground transition-colors hover:bg-accent"
-            >
-              Talk to Us
-            </Link>
-            <Link
-              to="/projects"
-              className="border border-input px-8 py-4 text-[10px] font-bold uppercase tracking-widest transition-colors hover:border-accent hover:text-accent"
-            >
-              View Projects
-            </Link>
+              { title: "Design", icon: PencilRuler, items: ["Architectural Design", "Interior Design", "Engineering Consultancy"] },
+              { title: "Build", icon: Construction, items: ["Construction Coordination", "Quality Assurance", "Procurement Support"] },
+              { title: "Project Management", icon: ClipboardList, items: ["Planning", "Cost Control", "Contract Administration"] },
+            ].map(group => <article key={group.title} className="flex items-start gap-4 border border-[#bfc0c4] p-4"><div className="flex h-20 w-20 shrink-0 items-center justify-center bg-[#a8aaae] text-white"><group.icon size={52} strokeWidth={1} aria-hidden="true" /></div><div><h3 className="mb-2 text-sm font-bold uppercase text-[#303b46]">{group.title}</h3><ul className="list-disc space-y-1 pl-4 text-sm font-light">{group.items.map(item => <li key={item}>{item}</li>)}</ul></div></article>)}
           </div>
         </div>
       </section>
 
-      <section className="px-6 py-24">
+      <section className="border-t border-[#bfc0c4]/50 px-6 py-16">
         <div className="mx-auto max-w-7xl">
-          <div className="mb-10 max-w-3xl">
-            <div className="mb-6 font-mono text-[10px] uppercase tracking-widest text-accent">
-              Featured Projects
-            </div>
-            <h2 className="text-4xl font-black uppercase tracking-tighter">
-              Beautiful spaces with lasting appeal
-            </h2>
+          <SectionHeading>Vision,<br />Mission &amp; Values</SectionHeading>
+          <div className="grid gap-10 md:grid-cols-2">
+            {[
+              { title: "Vision", icon: Eye, text: "To become a trusted regional leader in integrated design and construction solutions, delivering projects that create lasting value for our clients and communities." },
+              { title: "Mission", icon: Target, text: "To simplify the building journey by providing coordinated professional consultancy, project management, and construction services through one reliable point of responsibility." },
+            ].map(item => <article key={item.title} className="flex items-start gap-5"><div className="flex h-20 w-20 shrink-0 items-center justify-center rounded-full border border-[#bfc0c4] text-[#a8aaae]"><item.icon size={48} strokeWidth={1} aria-hidden="true" /></div><div><h3 className="mb-2 text-2xl font-semibold uppercase text-[#303b46]">{item.title}</h3><p className="text-base font-light leading-relaxed">{item.text}</p></div></article>)}
           </div>
-
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 xl:grid-cols-4">
-            {projectHighlights.map((project, index) => (
-              <article key={project.name} className="overflow-hidden border border-border bg-card">
-                <img
-                  src={project.image}
-                  alt={project.name}
-                  loading="lazy"
-                  className="aspect-[4/3] w-full object-cover"
-                />
-                <div className="p-6">
-                  <div className="mb-3 font-mono text-[10px] uppercase tracking-[0.2em] text-accent">
-                    {String(index + 1).padStart(2, "0")}
-                  </div>
-                  <h3 className="text-xl font-bold uppercase tracking-tight">{project.name}</h3>
-                  <p className="mt-3 text-xs uppercase tracking-[0.2em] text-muted-foreground">
-                    {project.type}
-                  </p>
-                  <p className="mt-2 text-sm text-muted-foreground">{project.location}</p>
-                </div>
-              </article>
-            ))}
+          <h3 className="mb-6 mt-12 text-2xl font-semibold uppercase text-[#303b46]">Core Values</h3>
+          <div className="grid max-w-4xl grid-cols-2 gap-px bg-[#bfc0c4] sm:grid-cols-4">
+            {coreValues.map(value => <div key={value.label} className="bg-white px-3 py-5 text-center"><div className="mx-auto mb-4 flex h-20 w-20 items-center justify-center border border-[#bfc0c4] text-[#a8aaae]"><value.icon size={52} strokeWidth={1} aria-hidden="true" /></div><h4 className="text-xs font-normal uppercase">{value.label}</h4></div>)}
           </div>
         </div>
       </section>
-
-      <section className="border-t border-border bg-primary px-6 py-24 text-primary-foreground">
-        <div className="mx-auto max-w-7xl">
-          <div className="mb-12 max-w-3xl">
-            <div className="mb-6 font-mono text-[10px] uppercase tracking-widest text-accent">
-              Our Philosophy
-            </div>
-            <h2 className="text-4xl font-black uppercase tracking-tighter">Vision & Mission</h2>
-          </div>
-
-          <div className="grid gap-8 md:grid-cols-2">
-            <div className="border border-primary-foreground/15 bg-primary/70 p-10">
-              <h3 className="mb-4 font-mono text-[10px] uppercase tracking-[0.2em] text-accent">
-                Our Vision
-              </h3>
-              <p className="text-2xl font-bold uppercase tracking-tight">
-                Creating Elevated Value
-              </p>
-              <p className="mt-6 text-sm leading-relaxed text-primary-foreground/75">
-                Transforming properties to meet high-end commercial standards, ensuring long-term
-                value, efficiency, and sustainable growth.
-              </p>
-            </div>
-
-            <div className="border border-primary-foreground/15 bg-primary/70 p-10">
-              <h3 className="mb-4 font-mono text-[10px] uppercase tracking-[0.2em] text-accent">
-                Our Mission
-              </h3>
-              <p className="text-2xl font-bold uppercase tracking-tight">
-                Delivering Hassle-Free Expertise
-              </p>
-              <p className="mt-6 text-sm leading-relaxed text-primary-foreground/75">
-                Deliver client-focused, reliable, and professionally qualified services through a
-                seamless, all-in-one consultancy and construction experience.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="px-6 py-24">
-        <div className="mx-auto max-w-7xl">
-          <div className="mb-12 max-w-3xl">
-            <div className="mb-6 font-mono text-[10px] uppercase tracking-widest text-accent">
-              Our Strength
-            </div>
-            <h2 className="text-4xl font-black uppercase tracking-tighter">
-              Why Choose Pearl Heritance
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 xl:grid-cols-4">
-            {strengths.map((item) => (
-              <div key={item.title} className="border border-border bg-card p-8">
-                <div className="mb-5 font-mono text-[10px] uppercase tracking-[0.2em] text-accent">
-                  0{strengths.indexOf(item) + 1}
-                </div>
-                <h3 className="mb-4 text-xl font-bold uppercase tracking-tight">{item.title}</h3>
-                <p className="text-sm leading-relaxed text-muted-foreground">{item.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="border-t border-border bg-card px-6 py-24">
-        <div className="mx-auto max-w-7xl">
-          <div className="mb-12 max-w-3xl">
-            <div className="mb-6 font-mono text-[10px] uppercase tracking-widest text-accent">
-              What We Do
-            </div>
-            <h2 className="text-4xl font-black uppercase tracking-tighter">
-              Services & Expertise
-            </h2>
-            <p className="mt-6 text-muted-foreground">
-              Choose a service to view scope, outcomes, and what you can expect from our process.
-            </p>
-          </div>
-
-          <div className="mb-12 flex justify-end">
-            <Link
-              to="/contact"
-              className="bg-primary px-8 py-4 text-[10px] font-bold uppercase tracking-widest text-primary-foreground transition-colors hover:bg-accent"
-            >
-              Get a Quote
-            </Link>
-          </div>
-
-          <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
-            {services.map((service) => (
-              <div
-                key={service.title}
-                className="flex min-h-[280px] flex-col border border-border bg-card p-8 text-center"
-              >
-                <div className="mb-6 flex justify-center">
-                  <div className="flex h-20 w-20 items-center justify-center rounded-full border border-border bg-background">
-                    <svg
-                      viewBox="0 0 64 64"
-                      className="h-10 w-10 stroke-[1.8] text-foreground"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      aria-hidden="true"
-                    >
-                      {service.icon === "design" && (
-                        <>
-                          <path d="M18 45V24l14-12 14 12v21" />
-                          <path d="M22 29h20M22 35h20M26 45V39h12v6" />
-                        </>
-                      )}
-                      {service.icon === "consultancy" && (
-                        <>
-                          <circle cx="18" cy="24" r="7" />
-                          <circle cx="32" cy="18" r="7" />
-                          <circle cx="46" cy="24" r="7" />
-                          <path d="M10 45c2-6 8-10 16-10s14 4 16 10" />
-                          <path d="M24 45c2-6 7-10 13-10s11 4 13 10" />
-                        </>
-                      )}
-                      {service.icon === "project" && (
-                        <>
-                          <path d="M20 18h24v28H20z" />
-                          <path d="M24 18V12h16v6M24 28h16M24 34h10" />
-                          <path d="M18 46h28" />
-                        </>
-                      )}
-                      {service.icon === "construction" && (
-                        <>
-                          <path d="M18 44V20h28v24" />
-                          <path d="M22 26h20M22 32h20M22 38h16" />
-                          <path d="M14 44h36" />
-                          <path d="M30 12l6 8h-12l6-8z" />
-                        </>
-                      )}
-                      {service.icon === "design-build" && (
-                        <>
-                          <path d="M16 44V22h16l16 10v12" />
-                          <path d="M20 22V16h12v6M28 18h8" />
-                          <path d="M22 30h20M22 36h20" />
-                        </>
-                      )}
-                      {service.icon === "development" && (
-                        <>
-                          <path d="M20 42V20h24v22" />
-                          <path d="M16 26h6M42 26h6M16 42h32" />
-                          <path d="M28 20v22M36 20v22" />
-                        </>
-                      )}
-                      {service.icon === "property" && (
-                        <>
-                          <circle cx="32" cy="22" r="8" />
-                          <path d="M18 44c2-6 7-10 14-10s12 4 14 10" />
-                          <path d="M16 26l16-10 16 10" />
-                        </>
-                      )}
-                      {service.icon === "support" && (
-                        <>
-                          <circle cx="32" cy="24" r="10" />
-                          <path d="M22 42c2-6 6-8 10-8s8 2 10 8" />
-                          <path d="M12 28c2-8 8-14 20-14s18 6 20 14" />
-                        </>
-                      )}
-                    </svg>
-                  </div>
-                </div>
-
-                <h3 className="mb-4 whitespace-pre-line text-2xl font-black uppercase leading-tight tracking-tight">
-                  {service.title}
-                </h3>
-
-                {service.items.length > 0 && (
-                  <ul className="space-y-2 text-sm leading-relaxed text-muted-foreground">
-                    {service.items.map((item) => (
-                      <li key={item} className="flex items-center justify-center gap-2">
-                        <span className="inline-block h-1.5 w-1.5 rounded-full bg-foreground/70" />
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </div>
-            ))}
-          </div>
-
-          <div className="mt-12 border border-border bg-background p-10">
-            <div className="mb-6 font-mono text-[10px] uppercase tracking-[0.2em] text-accent">
-              Selected Service
-            </div>
-            <h3 className="text-3xl font-black uppercase tracking-tight">
-              Construction Project Consultation
-            </h3>
-            <p className="mt-6 max-w-3xl text-lg text-muted-foreground">
-              Strategic planning and technical guidance to reduce risk, improve feasibility, and
-              align delivery with real-world constraints.
-            </p>
-            <div className="mt-8 grid gap-8 md:grid-cols-2">
-              <div>
-                <h4 className="mb-4 font-mono text-[10px] uppercase tracking-[0.2em] text-accent">
-                  What’s Included
-                </h4>
-                <ul className="space-y-3 text-sm text-muted-foreground">
-                  <li>• Feasibility + scope definition</li>
-                  <li>• Budget & timeline planning</li>
-                  <li>• Authority approvals guidance</li>
-                  <li>• Contractor selection support</li>
-                </ul>
-              </div>
-              <div>
-                <h4 className="mb-4 font-mono text-[10px] uppercase tracking-[0.2em] text-accent">
-                  Best For
-                </h4>
-                <p className="text-sm text-muted-foreground">New Builds</p>
-                <div className="mt-6">
-                  <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-accent">
-                    Typical Engagement
-                  </div>
-                  <p className="mt-2 text-sm text-muted-foreground">Varies</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="border-t border-border bg-card px-6 py-24">
-        <div className="mx-auto max-w-7xl">
-          <div className="mb-12 max-w-3xl">
-            <div className="mb-6 font-mono text-[10px] uppercase tracking-widest text-accent">
-              Professional Insights
-            </div>
-            <h2 className="text-4xl font-black uppercase tracking-tighter">
-              For Confident Decisions
-            </h2>
-          </div>
-
-          <div className="grid gap-6 md:grid-cols-2">
-            {faqItems.map((item) => (
-              <div key={item.question} className="border border-border bg-background p-8">
-                <h3 className="mb-4 text-xl font-bold uppercase tracking-tight">{item.question}</h3>
-                <p className="text-sm leading-relaxed text-muted-foreground">{item.answer}</p>
-              </div>
-            ))}
-          </div>
-
-          <div className="mt-10 flex flex-wrap items-center gap-4">
-            <p className="text-sm text-muted-foreground">Still have questions?</p>
-            <Link
-              to="/contact"
-              className="bg-primary px-8 py-4 text-[10px] font-bold uppercase tracking-widest text-primary-foreground transition-colors hover:bg-accent"
-            >
-              Contact our team
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      <section className="border-t border-border bg-card px-6 py-24">
-        <div className="mx-auto max-w-7xl">
-          <div className="flex flex-col gap-8 md:flex-row md:items-center md:justify-between">
-            <div>
-              <div className="mb-4 font-mono text-[10px] uppercase tracking-widest text-accent">
-                Get Started
-              </div>
-              <h2 className="max-w-xl text-4xl font-black uppercase tracking-tighter">
-                Ready to transform your property?
-              </h2>
-            </div>
-            <div className="flex flex-wrap gap-4">
-              <Link
-                to="/contact"
-                className="bg-primary px-8 py-4 text-[10px] font-bold uppercase tracking-widest text-primary-foreground transition-colors hover:bg-accent"
-              >
-                Contact Us
-              </Link>
-              <Link
-                to="/projects"
-                className="border border-input px-8 py-4 text-[10px] font-bold uppercase tracking-widest transition-colors hover:border-accent hover:text-accent"
-              >
-                View Work
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-    </>
+    </div>
   );
 }
