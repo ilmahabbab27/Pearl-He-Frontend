@@ -1,14 +1,24 @@
+import { api } from '@/lib/content';
 import { useState } from "react";
 import { company } from "@/data/company";
 
 export default function ContactPage() {
   const [form, setForm] = useState({ name: "", email: "", phone: "", message: "" });
 
-  const mailto = `mailto:${company.email}?subject=${encodeURIComponent(
-    `Project inquiry from ${form.name || "website"}`,
-  )}&body=${encodeURIComponent(
-    `Name: ${form.name}\nEmail: ${form.email}\nPhone: ${form.phone}\n\n${form.message}`,
-  )}`;
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
+  async function submit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    if (busy) return;
+    setBusy(true); setError(''); setSuccess('');
+    try {
+      const result = await api<{message: string}>('contact', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(form) });
+      setSuccess(result.message);
+      setForm({ name: '', email: '', phone: '', message: '' });
+    } catch (error) { setError((error as Error).message); }
+    finally { setBusy(false); }
+  }
 
   return (
     <>
@@ -31,11 +41,9 @@ export default function ContactPage() {
         <div className="mx-auto grid max-w-7xl grid-cols-1 gap-16 lg:grid-cols-12">
           <form
             className="lg:col-span-7"
-            onSubmit={(e) => {
-              e.preventDefault();
-              window.location.href = mailto;
-            }}
+            onSubmit={submit}
           >
+            <fieldset disabled={busy}>
             <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
               <label className="block">
                 <span className="mb-2 block font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
@@ -43,6 +51,8 @@ export default function ContactPage() {
                 </span>
                 <input
                   required
+                  maxLength={255}
+                  autoComplete="name"
                   value={form.name}
                   onChange={(e) => setForm({ ...form, name: e.target.value })}
                   className="w-full border border-input bg-card px-4 py-3 text-sm outline-none focus:border-accent"
@@ -55,6 +65,8 @@ export default function ContactPage() {
                 <input
                   required
                   type="email"
+                  maxLength={255}
+                  autoComplete="email"
                   value={form.email}
                   onChange={(e) => setForm({ ...form, email: e.target.value })}
                   className="w-full border border-input bg-card px-4 py-3 text-sm outline-none focus:border-accent"
@@ -66,6 +78,9 @@ export default function ContactPage() {
                 Phone
               </span>
               <input
+                type="tel"
+                maxLength={50}
+                autoComplete="tel"
                 value={form.phone}
                 onChange={(e) => setForm({ ...form, phone: e.target.value })}
                 className="w-full border border-input bg-card px-4 py-3 text-sm outline-none focus:border-accent"
@@ -78,6 +93,7 @@ export default function ContactPage() {
               <textarea
                 required
                 rows={6}
+                maxLength={10000}
                 value={form.message}
                 onChange={(e) => setForm({ ...form, message: e.target.value })}
                 className="w-full border border-input bg-card px-4 py-3 text-sm outline-none focus:border-accent"
@@ -87,11 +103,11 @@ export default function ContactPage() {
               type="submit"
               className="mt-8 bg-primary px-8 py-4 text-xs font-bold uppercase tracking-widest text-primary-foreground transition-colors hover:bg-accent"
             >
-              Send Inquiry
+              {busy ? 'Sending...' : 'Send Inquiry'}
             </button>
-            <p className="mt-4 font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
-              Opens your email client addressed to {company.email}
-            </p>
+            </fieldset>
+            {success && <p role="status" className="mt-4 text-sm text-green-700">{success}</p>}
+            {error && <p role="alert" className="mt-4 text-sm text-red-700">{error} Your message has not been sent. Please try again.</p>}
           </form>
 
           <div className="lg:col-span-5">

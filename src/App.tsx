@@ -1,3 +1,4 @@
+import AdminPage from './routes/admin'
 import { useEffect, useState } from 'react'
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
@@ -70,6 +71,7 @@ function PageLayout({ children }: { children: React.ReactNode }) {
 }
 
 function ChatbotWidget() {
+  const location = useLocation()
   const [open, setOpen] = useState(false)
   const [input, setInput] = useState('')
   const [messages, setMessages] = useState([
@@ -134,6 +136,8 @@ function ChatbotWidget() {
     ])
     setInput('')
   }
+
+  if (location.pathname.startsWith("/admin")) return null
 
   return (
     <div className="fixed bottom-5 right-5 z-50">
@@ -210,6 +214,7 @@ function App() {
       <QueryClientProvider client={queryClient}>
         <BrowserRouter>
           <Routes>
+            <Route path="/admin" element={<AdminPage />} />
             <Route path="/" element={<PageLayout><HomePage /></PageLayout>} />
             <Route path="/services" element={<PageLayout><ServicesPage /></PageLayout>} />
             <Route path="/projects" element={<PageLayout><ProjectsPage /></PageLayout>} />
@@ -223,9 +228,9 @@ function App() {
             <Route path="/contact" element={<PageLayout><ContactPage /></PageLayout>} />
             <Route path="*" element={<PageLayout><HomePage /></PageLayout>} />
           </Routes>
+          <ChatbotWidget />
         </BrowserRouter>
       </QueryClientProvider>
-      <ChatbotWidget />
     </>
   )
 }

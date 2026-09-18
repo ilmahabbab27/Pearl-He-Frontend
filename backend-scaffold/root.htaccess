@@ -1,0 +1,5 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    # Only the Laravel public directory may be reached through Apache.
+    RewriteRule ^(?!public(?:/|$)) - [F,L]
+</IfModule>

@@ -1,0 +1,112 @@
+[
+  {
+    "kind": "blogs",
+    "slug": "what-to-consider-before-starting-a-residential-build",
+    "title": "What to consider before starting a residential build",
+    "category": "Design Insight",
+    "summary": "A practical look at feasibility, budget alignment and decision-making milestones for residential projects.",
+    "description": null,
+    "body": [
+      "Before committing to a residential build, it is essential to establish the right brief, budget and timing. The strongest projects begin with clear goals, realistic expectations and a site strategy that reflects how the home will function in everyday life.",
+      "Feasibility should consider site conditions, access, local regulations and the overall scope of works. Early planning also helps identify potential constraints before they become expensive design changes during construction.",
+      "When the brief is clear and design decisions are aligned with budget and timeline, the project can move forward with fewer surprises. A well-structured approach protects both value and quality from concept through completion."
+    ],
+    "detail": null,
+    "read_time": "5 min read",
+    "image": "seed/project-residential.jpg",
+    "alt": "Modern residential project exterior",
+    "published": true
+  },
+  {
+    "kind": "blogs",
+    "slug": "how-a-consultant-led-model-keeps-delivery-on-track",
+    "title": "How a consultant-led model keeps delivery on track",
+    "category": "Project Management",
+    "summary": "Learn how clear governance, staged approvals and disciplined coordination reduce delays and improve outcomes.",
+    "description": null,
+    "body": [
+      "A consultant-led delivery model creates accountability from the outset. Instead of handling multiple separate contractors and design voices independently, the client deals with one coordinated team responsible for alignment and progress.",
+      "This structure supports better decision-making, clearer communication and stronger cost control. It also allows project milestones to be monitored more effectively, reducing the common risk of fragmented communication between consultants and contractors.",
+      "Whether the project is residential, hospitality or commercial, a single point of responsibility helps keep design intent connected to delivery reality. That connection is often what makes the difference between a stressful build and a stable, well-managed one."
+    ],
+    "detail": null,
+    "read_time": "7 min read",
+    "image": "seed/project-hospitality.jpg",
+    "alt": "Hospitality development and eco lodge concept",
+    "published": true
+  },
+  {
+    "kind": "blogs",
+    "slug": "design-choices-that-improve-long-term-value",
+    "title": "Design choices that improve long-term value",
+    "category": "Sustainability",
+    "summary": "Thoughtful planning can improve efficiency, reduce maintenance issues and support better long-term performance.",
+    "description": null,
+    "body": [
+      "Good design is not only about appearance; it is also about how a building performs over time. Thoughtful planning can improve comfort, reduce maintenance and protect long-term value for the owner.",
+      "Material selection, orientation, circulation and durability should be considered together. These decisions influence both the experience of the space and the practicality of upkeep over the years.",
+      "In modern developments, sustainable design is often simply good design. Higher-quality choices made early in the process can reduce future risk while creating better spaces for everyday living and working."
+    ],
+    "detail": null,
+    "read_time": "6 min read",
+    "image": "seed/project-interior.jpg",
+    "alt": "Interior design and detail of a polished contemporary space",
+    "published": true
+  },
+  {
+    "kind": "projects",
+    "slug": "residence-at-nawala",
+    "title": "Residence at Nawala",
+    "category": "Residential",
+    "summary": "A modern residence shaped around family living, natural light, and a clean architectural language that feels both elevated and practical.",
+    "description": "This private residence was designed to balance contemporary aesthetics with everyday functionality. The layout was carefully planned to support comfort, flow and long-term usability while creating a warm and refined living experience.",
+    "body": [],
+    "detail": "Design & build · 2,800 sqft",
+    "read_time": null,
+    "image": "seed/project-residential.jpg",
+    "alt": "Modern private residence at Nawala",
+    "published": true
+  },
+  {
+    "kind": "projects",
+    "slug": "mini-apartment-complex-dehiwala",
+    "title": "Mini Apartment Complex, Dehiwala",
+    "category": "Commercial",
+    "summary": "A multi-unit development delivered with strong coordination between planning, cost control, and construction oversight.",
+    "description": "This development required disciplined project coordination across stakeholder groups, design decisions and site execution. The result was a commercially viable multi-unit scheme built around efficient use of space and dependable delivery.",
+    "body": [],
+    "detail": "Project management · Multi-unit development",
+    "read_time": null,
+    "image": "seed/project-commercial.jpg",
+    "alt": "Commercial apartment complex in Dehiwala",
+    "published": true
+  },
+  {
+    "kind": "projects",
+    "slug": "eco-lodge-retreat",
+    "title": "Eco Lodge Retreat",
+    "category": "Hospitality",
+    "summary": "A hospitality concept designed around natural surroundings, guest experience, and environmentally sensitive development principles.",
+    "description": "The eco lodge concept combines hospitality design with careful site sensitivity and thoughtful guest circulation. The project reflects a balance between sustainable thinking, visual identity, and practical operations.",
+    "body": [],
+    "detail": "Design consultancy · Construction supervision",
+    "read_time": null,
+    "image": "seed/project-hospitality.jpg",
+    "alt": "Eco lodge retreat in the hill country",
+    "published": true
+  },
+  {
+    "kind": "projects",
+    "slug": "cafe-retail-fit-outs-colombo",
+    "title": "Café & Retail Fit-Outs, Colombo",
+    "category": "Interiors",
+    "summary": "A retail and hospitality fit-out designed to create a memorable customer journey through tailored interior detailing.",
+    "description": "This interior-led project focused on creating a warm, functional and brand-aligned environment. Custom finishes, efficient circulation and layered textures helped transform the space into a high-impact commercial experience.",
+    "body": [],
+    "detail": "Interior design & built · Custom joinery",
+    "read_time": null,
+    "image": "seed/project-interior.jpg",
+    "alt": "Café interior fit-out in Colombo",
+    "published": true
+  }
+]

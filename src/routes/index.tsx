@@ -1,3 +1,4 @@
+import { useSiteSettings } from '@/lib/content';
 import ProjectDeliveryProcess from "@/components/project-delivery-process";
 import WhatWeDo from "@/components/what-we-do";
 import WhyChooseSection from "@/components/why-choose-section";
@@ -12,6 +13,7 @@ import { company, values } from "@/data/company";
 const showLatestInsights = false;
 
 export default function Home() {
+  const { data: settings } = useSiteSettings();
   return (
     <>
       <section className="relative overflow-hidden border-b border-border px-6 pt-24 pb-28">
@@ -45,8 +47,8 @@ export default function Home() {
           </div>
           <div className="animate-fade-up lg:col-span-5">
             <img
-              src={heroImage}
-              alt="Contemporary Sri Lankan residence designed and delivered by Pearl Heritance"
+              src={settings?.hero_image || heroImage}
+              alt={settings?.hero_alt || "Contemporary Sri Lankan residence designed and delivered by Pearl Heritance"}
               width={1600}
               height={1104}
               className="h-full w-full object-cover"

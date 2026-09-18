@@ -1,48 +1,13 @@
+import { useContent } from '@/lib/content';
+import ContentStatus from '@/components/content-status';
 import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
-import projectResidential from "@/assets/project-residential.jpg";
-import projectCommercial from "@/assets/project-commercial.jpg";
-import projectHospitality from "@/assets/project-hospitality.jpg";
-import projectInterior from "@/assets/project-interior.jpg";
 
-const projects = [
-  {
-    slug: "residence-at-nawala",
-    name: "Residence at Nawala",
-    sector: "Residential",
-    detail: "Design & build · 2,800 sqft",
-    image: projectResidential,
-    alt: "Modern private residence at Nawala",
-  },
-  {
-    slug: "mini-apartment-complex-dehiwala",
-    name: "Mini Apartment Complex, Dehiwala",
-    sector: "Commercial",
-    detail: "Project management · Multi-unit development",
-    image: projectCommercial,
-    alt: "Commercial apartment complex in Dehiwala",
-  },
-  {
-    slug: "eco-lodge-retreat",
-    name: "Eco Lodge Retreat",
-    sector: "Hospitality",
-    detail: "Design consultancy · Construction supervision",
-    image: projectHospitality,
-    alt: "Eco lodge retreat in the hill country",
-  },
-  {
-    slug: "cafe-retail-fit-outs-colombo",
-    name: "Café & Retail Fit-Outs, Colombo",
-    sector: "Interiors",
-    detail: "Interior design & built · Custom joinery",
-    image: projectInterior,
-    alt: "Café interior fit-out in Colombo",
-  },
-] as const;
 
 const filters = ["All", "Residential", "Commercial", "Hospitality", "Interiors"] as const;
 
 export default function ProjectsPage() {
+  const { data: projects = [], isPending, isError, refetch } = useContent('projects');
   const [activeFilter, setActiveFilter] = useState<(typeof filters)[number]>("All");
   const [search, setSearch] = useState("");
 
@@ -54,12 +19,14 @@ export default function ProjectsPage() {
       const matchesSearch =
         query.length === 0 ||
         project.name.toLowerCase().includes(query) ||
-        project.detail.toLowerCase().includes(query) ||
+        (project.detail || '').toLowerCase().includes(query) ||
         project.sector.toLowerCase().includes(query);
 
       return matchesFilter && matchesSearch;
     });
-  }, [activeFilter, search]);
+  }, [activeFilter, search, projects]);
+
+  if (isPending || isError) return <ContentStatus error={isError} retry={() => refetch()} />;
 
   return (
     <>
