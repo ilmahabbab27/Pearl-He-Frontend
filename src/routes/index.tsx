@@ -1,4 +1,4 @@
-import { useSiteSettings } from '@/lib/content';
+import { useSiteSettings, useTestimonials } from '@/lib/content';
 import ProjectDeliveryProcess from "@/components/project-delivery-process";
 import WhatWeDo from "@/components/what-we-do";
 import WhyChooseSection from "@/components/why-choose-section";
@@ -14,6 +14,7 @@ const showLatestInsights = false;
 
 export default function Home() {
   const { data: settings } = useSiteSettings();
+  const testimonials = useTestimonials();
   return (
     <>
       <section className="relative overflow-hidden border-b border-border px-6 pt-24 pb-28">
@@ -185,27 +186,11 @@ export default function Home() {
             </span>
           </div>
           <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-            {[
-              {
-                quote:
-                  "Pearl Heritance brought clarity, discipline and confidence to our project from the very first discussion.",
-                name: "A. Silva",
-                role: "Homeowner",
-              },
-              {
-                quote:
-                  "Their team balanced design sensibility with practical execution and kept the process organised throughout.",
-                name: "M. Perera",
-                role: "Property Developer",
-              },
-              {
-                quote:
-                  "The attention to detail and transparent communication made a complex project feel manageable and well controlled.",
-                name: "R. Fernando",
-                role: "Hospitality Client",
-              },
-            ].map((item) => (
-              <blockquote key={item.name} className="border border-border bg-card p-8">
+            {testimonials.isPending && <p>Loading client feedback…</p>}
+            {testimonials.isError && <p role="alert">Could not load client feedback. <button onClick={() => testimonials.refetch()}>Retry</button></p>}
+            {testimonials.data?.length === 0 && <p>No client feedback is published yet.</p>}
+            {testimonials.data?.slice(0, 3).map((item) => (
+              <blockquote key={item.id} className="border border-border bg-card p-8">
                 <div className="mb-6 inline-flex gap-1 bg-transparent px-1 py-1">
                   <span className="inline-block text-[#0b5ea8] drop-shadow-[0_0_0_#d4af37]">★</span>
                   <span className="inline-block text-[#0b5ea8] drop-shadow-[0_0_0_#d4af37]">★</span>

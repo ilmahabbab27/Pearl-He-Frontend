@@ -1,6 +1,7 @@
 import BlogVideoField from '@/components/blog-video-field';
 import HeroSettings from '@/components/hero-settings';
 import ContactMessages from '@/components/contact-messages';
+import TestimonialManager from '@/components/testimonial-manager';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
@@ -8,7 +9,7 @@ import { api, type ApiError, type ContentItem } from '@/lib/content';
 import logo from '@/assets/pearl-mark.svg';
 import './admin.css';
 
-type Kind = 'blogs' | 'projects' | 'messages' | 'hero';
+type Kind = 'blogs' | 'projects' | 'testimonials' | 'messages' | 'hero';
 export default function AdminPage() {
   const client = useQueryClient();
   const [kind, setKind] = useState<Kind>('blogs');
@@ -61,13 +62,14 @@ export default function AdminPage() {
   </form></div>;
   return <div className="cms"><header className="cms-header"><div className="cms-brand"><img src={logo} alt="" width="38" /><div><strong>PEARL HERITANCE</strong><p>Content management</p></div></div><div className="cms-actions"><Link to="/">View website</Link><button onClick={logout} disabled={busy}>Sign out</button></div></header>
     <main className="cms-main"><p className="cms-eyebrow">WELCOME, {user.data.name}</p><h1>Your website content</h1><p>Create, update and publish your latest work and articles.</p>
-      <nav className="cms-tabs" aria-label="Content type">{(['blogs', 'projects', 'messages', 'hero'] as Kind[]).map(value => <button disabled={busy} key={value} aria-pressed={kind === value} onClick={() => { setKind(value); setEditing(null); setError(''); setNotice(''); }}>{value === 'blogs' ? 'Blog articles' : value === 'projects' ? 'Projects' : value === 'messages' ? 'Contact messages' : 'Hero image'}</button>)}</nav>
+      <nav className="cms-tabs" aria-label="Content type">{(['blogs', 'projects', 'testimonials', 'messages', 'hero'] as Kind[]).map(value => <button disabled={busy} key={value} aria-pressed={kind === value} onClick={() => { setKind(value); setEditing(null); setError(''); setNotice(''); }}>{value === 'blogs' ? 'Blog articles' : value === 'projects' ? 'Projects' : value === 'testimonials' ? 'Testimonials' : value === 'messages' ? 'Contact messages' : 'Hero image'}</button>)}</nav>
       {error && <p role="alert" className="cms-error">{error}</p>}{notice && <p role="status" className="cms-notice">{notice}</p>}
-      {kind === 'hero' ? <HeroSettings /> : kind === 'messages' ? <ContactMessages /> : editing ? <form key={`${kind}-${item?.id || 'new'}`} onSubmit={save} className="cms-card"><div className="cms-actions"><h2>{item ? 'Edit' : 'New'} {kind === 'blogs' ? 'article' : 'project'}</h2><button type="button" disabled={busy} onClick={() => setEditing(null)}>Cancel</button></div>
+      {kind === 'hero' ? <HeroSettings /> : kind === 'messages' ? <ContactMessages /> : kind === 'testimonials' ? <TestimonialManager /> : editing ? <form key={`${kind}-${item?.id || 'new'}`} onSubmit={save} className="cms-card"><div className="cms-actions"><h2>{item ? 'Edit' : 'New'} {kind === 'blogs' ? 'article' : 'project'}</h2><button type="button" disabled={busy} onClick={() => setEditing(null)}>Cancel</button></div>
         <fieldset disabled={busy} className="cms-fields"><label>Title<input name="title" defaultValue={item?.title} required maxLength={255} /></label>
         <label>URL slug<input name="slug" defaultValue={item?.slug} required pattern="[a-z0-9]+(-[a-z0-9]+)*" maxLength={255} placeholder="example-project-title" /><small>Lowercase words separated by hyphens.</small></label>
         <label>{kind === 'blogs' ? 'Category' : 'Sector'}{kind === 'projects' ? <select name="category" defaultValue={item?.category || 'Residential'}>{['Residential', 'Commercial', 'Hospitality', 'Interiors'].map(v => <option key={v}>{v}</option>)}</select> : <input name="category" defaultValue={item?.category} required maxLength={255} />}</label>
         <label>{kind === 'blogs' ? 'Reading time' : 'Project details'}<input name={kind === 'blogs' ? 'read_time' : 'detail'} defaultValue={kind === 'blogs' ? item?.read_time : item?.detail} maxLength={255} placeholder={kind === 'blogs' ? '5 min read' : 'Design & build · 2,800 sqft'} /></label>
+        {kind === 'projects' && <label>Display order<input name="sort_order" type="number" min="0" max="1000000" defaultValue={item?.sort_order ?? (items.data?.length ?? 0) + 1} required /><small>Lower numbers appear first.</small></label>}
         {kind === 'blogs' && <BlogVideoField key={item?.id || 'new'} initialUrl={item?.youtube_url} />}
         <label className="cms-wide">Summary<textarea name="summary" defaultValue={item?.summary} required rows={3} maxLength={5000} /></label>
         <label className="cms-wide">{kind === 'blogs' ? 'Article text' : 'Project description'}<textarea name={kind === 'blogs' ? 'body' : 'description'} defaultValue={kind === 'blogs' ? item?.body.join('\n\n') : item?.description} required rows={10} maxLength={kind === 'blogs' ? 100000 : 50000} /><small>Plain text. Separate paragraphs with a blank line.</small></label>
@@ -85,7 +87,7 @@ export default function AdminPage() {
         <label className="cms-checkbox cms-wide"><input type="checkbox" name="published" defaultChecked={item?.published} />Publish on website</label>
         <button className="cms-primary" type="submit">{busy ? 'Saving…' : 'Save content'}</button></fieldset>
       </form> : <><div className="cms-actions"><h2>{kind === 'blogs' ? 'Blog articles' : 'Projects'} ({items.data?.length ?? 0})</h2><button className="cms-primary" onClick={() => { setEditing('new'); setNotice(''); }}>+ Add {kind === 'blogs' ? 'article' : 'project'}</button></div>
-        {items.isPending ? <p>Loading…</p> : items.isError ? <p role="alert">Could not load content. <button onClick={() => items.refetch()}>Retry</button></p> : !items.data.length ? <div className="cms-card">No content yet. Add your first {kind === 'blogs' ? 'article' : 'project'}.</div> : <div className="cms-list">{items.data.map(entry => <article className="cms-row" key={entry.id}><img src={entry.image} alt={entry.alt} /><div><h3>{entry.title}</h3><p>{entry.category} · <span>{entry.published ? 'Published' : 'Draft'}</span></p></div><div className="cms-actions"><button disabled={busy} onClick={() => { setEditing(entry); setNotice(''); }}>Edit</button>{entry.published && <Link to={`/${kind}/${entry.slug}`}>View</Link>}<button className="cms-delete" disabled={busy} onClick={() => remove(entry)}>Delete</button></div></article>)}</div>}
+        {items.isPending ? <p>Loading…</p> : items.isError ? <p role="alert">Could not load content. <button onClick={() => items.refetch()}>Retry</button></p> : !items.data.length ? <div className="cms-card">No content yet. Add your first {kind === 'blogs' ? 'article' : 'project'}.</div> : <div className="cms-list">{items.data.map(entry => <article className="cms-row" key={entry.id}><img src={entry.image} alt={entry.alt} /><div><h3>{entry.title}</h3><p>{entry.category} · <span>{entry.published ? 'Published' : 'Draft'}</span>{kind === 'projects' && ` · Order ${entry.sort_order ?? '—'}`}</p></div><div className="cms-actions"><button disabled={busy} onClick={() => { setEditing(entry); setNotice(''); }}>Edit</button>{entry.published && <Link to={`/${kind}/${entry.slug}`}>View</Link>}<button className="cms-delete" disabled={busy} onClick={() => remove(entry)}>Delete</button></div></article>)}</div>}
       </>}
     </main></div>;
 }

@@ -14,10 +14,10 @@ class ContentController extends Controller
         return array_merge($item->toArray(), [
             'name' => $item->title, 'sector' => $item->category,
             'readTime' => $item->read_time, 'body' => $item->body ?? [],
-            'partner_logo' => $item->partner_logo ? '/storage/'.$item->partner_logo : null,
-            'image' => $item->image ? '/storage/'.$item->image : null,
-            'gallery' => array_map(fn ($path) => $path ? '/storage/'.$path : null, $item->gallery ?? []),
-            'images' => array_map(fn ($path) => '/storage/'.$path, array_values(array_filter(array_merge([$item->image], $item->gallery ?? [])))),
+            'partner_logo' => $item->partner_logo ? Storage::disk('public')->url($item->partner_logo) : null,
+            'image' => $item->image ? Storage::disk('public')->url($item->image) : null,
+            'gallery' => array_map(fn ($path) => $path ? Storage::disk('public')->url($path) : null, $item->gallery ?? []),
+            'images' => array_map(fn ($path) => Storage::disk('public')->url($path), array_values(array_filter(array_merge([$item->image], $item->gallery ?? [])))),
         ]);
     }
     public function index(string $kind)

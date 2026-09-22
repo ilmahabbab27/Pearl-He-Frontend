@@ -1,35 +1,7 @@
-const testimonials = [
-  {
-    name: "R. Perera",
-    role: "Homeowner, Nawala",
-    project: "Residence transformation",
-    quote:
-      "Pearl Heritance gave us clarity from the first site visit. Their project leadership, technical guidance and open communication kept the build moving smoothly and the final result exceeded our expectations.",
-  },
-  {
-    name: "M. Fernando",
-    role: "Developer, Colombo",
-    project: "Mixed-use development",
-    quote:
-      "Their consultant-led model was exactly what we needed. The team coordinated design decisions, approvals and contractor scheduling with professionalism, which saved both time and unnecessary stress.",
-  },
-  {
-    name: "S. Jayawardena",
-    role: "Hospitality investor",
-    project: "Eco lodge concept",
-    quote:
-      "From feasibility and planning through to construction oversight, the team took ownership at every step. We felt supported, informed and confident throughout the entire process.",
-  },
-  {
-    name: "A. Gunasekara",
-    role: "Retail business owner",
-    project: "Commercial fit-out",
-    quote:
-      "The project management discipline was exceptional. Decisions were thoughtful, communication was clear and the finished space aligned perfectly with our brand and operating requirements.",
-  },
-] as const;
+import { useTestimonials } from '@/lib/content';
 
 export default function TestimonialsPage() {
+  const testimonials = useTestimonials();
   return (
     <>
       <section className="border-b border-border px-6 py-24">
@@ -74,7 +46,10 @@ export default function TestimonialsPage() {
 
       <section className="px-6 py-24">
         <div className="mx-auto grid max-w-7xl grid-cols-1 gap-8 md:grid-cols-2">
-          {testimonials.map((item) => (
+          {testimonials.isPending && <p>Loading testimonials…</p>}
+          {testimonials.isError && <p role="alert">Could not load testimonials. <button onClick={() => testimonials.refetch()}>Retry</button></p>}
+          {testimonials.data?.length === 0 && <p>No testimonials are published yet.</p>}
+          {testimonials.data?.map((item) => (
             <article key={item.name} className="border border-border bg-card p-8">
               <div className="mb-6 flex items-center justify-between gap-4">
                 <div className="inline-flex gap-1 bg-transparent px-1 py-1">

@@ -2,14 +2,14 @@ import ServiceIcon from "@/components/service-icon";
 
 const integratedServices = [
   {
-    title: "DESIGN",
-    items: ["Architectural Design", "Interior Design", "Landscape Design"],
-    icon: "design",
-  },
-  {
     title: "DESIGN & BUILD",
     items: [],
     icon: "design-build",
+  },
+  {
+    title: "DESIGN",
+    items: ["Architectural Design", "Interior Design", "Landscape Design"],
+    icon: "design",
   },
   {
     title: "CONSULTANCY",

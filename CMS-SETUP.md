@@ -45,11 +45,34 @@ In the frontend folder run `npm run dev` and open `/admin`. Use the credentials 
 ## Validation
 
 Frontend: `npm run build` and `npx tsc --project tsconfig.cms.json`.
-Backend: `php artisan test --compact` (21 tests, 177 assertions).
+Backend: `php artisan test --compact` (22 tests, 185 assertions).
 The scoped TypeScript configuration checks the active React application; legacy unused files have pre-existing errors in the repository-wide configuration.
 
-## Hosting
+## Hosting on https://pearlhe.com (cPanel)
 
-The development server proxies `/api` and `/storage` to Laravel on port 8000. For deployment, route those paths to Laravel under the same public origin as the frontend, and serve the React build with an SPA fallback for `/admin`, `/blogs/*` and `/projects/*`. Laravel's Apache document root must point to its `public` directory. Set production APP_URL, APP_ENV=production, APP_DEBUG=false and SESSION_SECURE_COOKIE=true for HTTPS. Do not upload backend `.env` or storage credentials to the frontend host. Database content requires the backend to be deployed and available; it is not bundled into a static frontend build.
+Changes are in the existing frontend and Laravel repositories. No separate deployment package is required.
 
-`backend-scaffold` contains the custom backend source and original content seed as a reviewable copy. The running Laravel installation is in the backend folder above.
+1. Run `npm run build` in the frontend repository. Upload the contents of `dist`, including its hidden `.htaccess`, to `public_html`.
+2. Upload the Laravel project to `public_html/backend`, including its root `index.php`, root `.htaccess`, and production `vendor` dependencies. Exclude local `.env`, Git metadata, tests, local databases, logs, sessions and `storage/app/admin-credentials.local.txt`. Do not upload local bootstrap cache files. Preserve existing hosted configuration, images and data when updating a live site.
+3. On the host, copy `.env.production.example` to `.env` for a FIRST installation only. Enter your cPanel MySQL credentials; the local XAMPP port/password are not the hosted credentials. APP_URL is https://pearlhe.com/backend. PUBLIC_UPLOADS=true writes files directly into backend/uploads, and PUBLIC_STORAGE_URL=/backend/uploads generates their URLs. Session cookies use HTTPS and the /backend path.
+4. Copy the contents of the local backend `storage/app/public` into hosted `backend/uploads` so existing image paths, including seed images, keep working. No storage symlink is needed. New uploads go directly to this real folder.
+5. To preserve your current content and admin account, export local `pearlhe_backend` through phpMyAdmin and import into the empty hosted database. Keep SQL exports outside public_html. Alternatively, use the original demo seeder and create a new admin as below.
+6. In cPanel Terminal, from `public_html/backend`, run:
+
+```sh
+composer install --no-dev --optimize-autoloader
+php artisan key:generate --force
+php artisan migrate --force
+php artisan config:cache
+php artisan view:cache
+```
+
+Generate APP_KEY only for a new installation; keep the existing production key on updates. If vendor was installed locally for production and uploaded, Composer is optional on the host. For a fresh database without an import, also run `php artisan db:seed --class=ContentSeeder --force` and `php artisan admin:create`. If cPanel has no Terminal, ask the hosting provider to execute these commands.
+
+Hosting requirements: PHP 8.2+, Laravel PHP extensions, Apache mod_rewrite with AllowOverride enabled; writable storage, bootstrap/cache and uploads. Use upload_max_filesize >= 4M and post_max_size >= 16M.
+
+Frontend production paths are configured in `.env.production`: VITE_API_BASE=/backend/api and VITE_STORAGE_BASE=/backend/uploads. Local `npm run dev` continues to proxy /api and /storage to Laravel at port 8000.
+
+After upload, check /backend/api/settings, /backend/api/content/blogs, /backend/api/content/projects, /admin login, image uploads and contact submissions. Private paths such as /backend/.env, /backend/composer.json and /backend/vendor/autoload.php must return 403 or 404. The root backend .htaccess exposes only the API, health endpoint, front controller and approved image filenames; do not replace it with an unrestricted fallback.
+
+`backend-scaffold` remains the existing reviewable mirror of the custom Laravel source. The running backend repository is C:\xampp\htdocs\PearlHe Backend.

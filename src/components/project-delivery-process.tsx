@@ -1,12 +1,17 @@
-import processPhotos from "@/assets/delivery-process-photos.png";
+import consultationPhoto from "@/assets/process/01-consultation.png";
+import designPlanningPhoto from "@/assets/process/02-design-planning.png";
+import teamFormationPhoto from "@/assets/process/03-team-formation.png";
+import contractsPhoto from "@/assets/process/04-contracts-project-setup.png";
+import constructionPhoto from "@/assets/process/05-construction-management.png";
+import completionPhoto from "@/assets/process/06-completion-aftercare.png";
 
 const steps = [
-  { number: "01", title: "CONSULTATION", text: "We listen, understand and assess your vision, requirements and objectives through in-depth consultation.", photo: "0% 0%", order: "lg:order-1" },
-  { number: "02", title: "DESIGN & PLANNING", text: "We transform ideas into functional, innovative and sustainable designs with detailed planning and technical expertise.", photo: "50% 0%", order: "lg:order-2" },
-  { number: "03", title: "TEAM FORMATION", text: "We assemble the right team of professionals and specialists to ensure seamless collaboration and project alignment.", photo: "100% 0%", order: "lg:order-3" },
-  { number: "04", title: "CONTRACTS & PROJECT SETUP", text: "We establish clear contracts, define roles, set timelines and implement systems to ensure a strong foundation for successful delivery.", photo: "0% 100%", order: "lg:order-6" },
-  { number: "05", title: "CONSTRUCTION MANAGEMENT", text: "We oversee construction with strict quality control, safety management and timely execution to bring your vision to life.", photo: "50% 100%", order: "lg:order-5" },
-  { number: "06", title: "COMPLETION & AFTERCARE", text: "We deliver with pride and provide ongoing aftercare and support to ensure long-term value and client satisfaction.", photo: "100% 100%", order: "lg:order-4" },
+  { number: "01", title: "CONSULTATION", text: "We listen, understand and assess your vision, requirements and objectives through in-depth consultation.", photo: consultationPhoto, order: "lg:order-1" },
+  { number: "02", title: "DESIGN & PLANNING", text: "We transform ideas into functional, innovative and sustainable designs with detailed planning and technical expertise.", photo: designPlanningPhoto, order: "lg:order-2" },
+  { number: "03", title: "TEAM FORMATION", text: "We assemble the right team of professionals and specialists to ensure seamless collaboration and project alignment.", photo: teamFormationPhoto, order: "lg:order-3" },
+  { number: "04", title: "CONTRACTS & PROJECT SETUP", text: "We establish clear contracts, define roles, set timelines and implement systems to ensure a strong foundation for successful delivery.", photo: contractsPhoto, order: "lg:order-6" },
+  { number: "05", title: "CONSTRUCTION MANAGEMENT", text: "We oversee construction with strict quality control, safety management and timely execution to bring your vision to life.", photo: constructionPhoto, order: "lg:order-5" },
+  { number: "06", title: "COMPLETION & AFTERCARE", text: "We deliver with pride and provide ongoing aftercare and support to ensure long-term value and client satisfaction.", photo: completionPhoto, order: "lg:order-4" },
 ];
 
 export default function ProjectDeliveryProcess({ headingLevel: Heading = "h1" }: { headingLevel?: "h1" | "h2" }) {
@@ -32,7 +37,7 @@ export default function ProjectDeliveryProcess({ headingLevel: Heading = "h1" }:
                 <p className="text-sm leading-relaxed text-[#344454]">{step.text}</p>
               </div>
               <div className="overflow-hidden" aria-hidden="true">
-                <div className="h-full w-full" style={{ backgroundImage: `url(${processPhotos})`, backgroundSize: "auto 200%", backgroundPosition: step.photo }} />
+                <img src={step.photo} alt="" className="h-full w-full object-cover" />
               </div>
             </article>
           ))}

@@ -4,8 +4,8 @@ import WhatWeDo from "@/components/what-we-do";
 export default function ServicesPage() {
   return (
     <>
-      <WhatWeDo headingLevel="h1" />
-      <ProjectDeliveryProcess headingLevel="h2" />
+      <ProjectDeliveryProcess headingLevel="h1" />
+      <WhatWeDo headingLevel="h2" />
     </>
   );
 }

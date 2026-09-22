@@ -107,12 +107,18 @@ export default function ProjectsPage() {
                     </span>
                   </div>
                   <div className="mt-6 flex items-start justify-between gap-6">
-                    <div>
+                    <div className="min-w-0">
                       <Link to={`/projects/${p.slug}`} className="font-bold uppercase hover:text-accent">
                         {p.name}
                       </Link>
                       <p className="text-xs text-muted-foreground">{p.detail}</p>
                     </div>
+                    {p.partner_logo && <img
+                      src={p.partner_logo}
+                      alt={`${p.partner_name || 'Partner company'} logo`}
+                      loading="lazy"
+                      className="h-14 w-28 shrink-0 bg-white object-contain"
+                    />}
                   </div>
                 </article>
               ))}

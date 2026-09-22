@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Storage;
 class SiteSettingController extends Controller {
     public function show() {
         $settings = SiteSetting::findOrFail(1);
-        return response()->json(['hero_image' => '/storage/'.$settings->hero_image, 'hero_alt' => $settings->hero_alt]);
+        return response()->json(['hero_image' => Storage::disk('public')->url($settings->hero_image), 'hero_alt' => $settings->hero_alt]);
     }
     public function update(Request $request) {
         $data = $request->validate(['hero_alt' => 'required|string|max:255', 'hero_image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:4096']);
