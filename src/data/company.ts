@@ -14,7 +14,7 @@ export const company = {
     },
     {
       label: "Corporate Office",
-      lines: ["No. 253B, 1/1,", "Stanley Thilakarathne Road,", "Nugegoda, Sri Lanka."],
+      lines: ["No. 253B 1/1,", "Stanley Thilakarathne Road,", "Nugegoda, Sri Lanka."],
       phone: "+94 114 23 69 52",
       phoneHref: "+94114236952",
     },

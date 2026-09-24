@@ -44,7 +44,7 @@ export default function ContactPage() {
             <fieldset disabled={busy}>
             <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
               <label className="block">
-                <span className="mb-2 block font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
+                <span className="mb-2 block text-lg font-bold text-foreground">
                   Full name
                 </span>
                 <input
@@ -57,7 +57,7 @@ export default function ContactPage() {
                 />
               </label>
               <label className="block">
-                <span className="mb-2 block font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
+                <span className="mb-2 block text-lg font-bold text-foreground">
                   Email
                 </span>
                 <input
@@ -72,7 +72,7 @@ export default function ContactPage() {
               </label>
             </div>
             <label className="mt-6 block">
-              <span className="mb-2 block font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
+              <span className="mb-2 block text-lg font-bold text-foreground">
                 Phone
               </span>
               <input
@@ -85,7 +85,7 @@ export default function ContactPage() {
               />
             </label>
             <label className="mt-6 block">
-              <span className="mb-2 block font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
+              <span className="mb-2 block text-lg font-bold text-foreground">
                 Project details
               </span>
               <textarea

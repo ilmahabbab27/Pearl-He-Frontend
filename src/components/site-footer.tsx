@@ -74,6 +74,18 @@ export function SiteFooter() {
           <p className="font-mono text-[9px] uppercase tracking-widest text-muted-foreground">
             {company.promise}
           </p>
+          <p className="text-center font-mono text-[9px] uppercase tracking-widest text-muted-foreground">
+            Developed by Ilma ·{" "}
+            <a
+              href="https://wa.me/94764627123"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Contact Ilma on WhatsApp at 0764627123"
+              className="underline underline-offset-4 transition-colors hover:text-accent"
+            >
+              0764627123
+            </a>
+          </p>
         </div>
       </div>
     </footer>
